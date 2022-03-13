@@ -28,7 +28,7 @@ const RegForm = ({ navigation, route }) => {
 
     const submitData = () => {
             //For Phone
-            fetch("(http://10.2.2:3000/send-data", {
+            fetch("(http://10.0.2.2:3000/send-data", {
                 method: "post",
                 headers: {
                     'Content-Type': 'application/json'

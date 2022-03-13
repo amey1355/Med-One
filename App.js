@@ -4,6 +4,8 @@ import { Animated, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import COLORS from './src/consts/color';
+
 // // // SideBar imports
 import profile from './assets/profile.png';
 // Tab ICons...
@@ -48,6 +50,7 @@ export default function App() {
     // Navigation
     <NavigationContainer>
       <Stack.Navigator initialRouteName="MedOne">
+
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="RegForm" component={RegForm} />
@@ -57,7 +60,11 @@ export default function App() {
           <Drawer.Screen name="Home" component={HomePage} />
           <Drawer.Screen name="SignIn" component={SignIn}/>
         </Drawer.Navigator> */}
-        <Stack.Screen style={styles.medOne} name="MedOne" component={MedOne} />
+        <Stack.Screen options={{
+          headerStyle: {
+            backgroundColor: COLORS.secondary,
+          }, headerTintColor: "white"
+        }} name="MedOne" component={MedOne} />
       </Stack.Navigator>
     </NavigationContainer>
     // Navigation
@@ -66,9 +73,7 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  medOne: {
-    
-  },
+
   container: {
     flex: 1,
     backgroundColor: '#fff',
