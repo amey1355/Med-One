@@ -82,7 +82,7 @@ const SignIn = ({ navigation }) => {
                     </View>
                     <View style={STYLES.btnPrimary}>
                         <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 18 }}
-                        onPress={() => submit()}
+                            onPress={() => submit()}
                         >
                             Sign In
                         </Text>

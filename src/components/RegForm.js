@@ -1,7 +1,8 @@
 import { React, useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert, Platform } from 'react-native';
 import COLORS from '../consts/color';
 import STYLES from '../styles/index';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 // import Drop from './Drop';
 // import { Dropdown } from 'react-native-material-dropdown';
 const RegForm = ({ navigation, route }) => {
@@ -27,17 +28,17 @@ const RegForm = ({ navigation, route }) => {
     const [password, setPassword] = useState(getDetails("password"))
 
     const submitData = () => {
-            //For Phone
-            fetch("(http://10.0.2.2:3000/send-data", {
-                method: "post",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    name, email, phone, password,
-                })
+        //For Phone
+        fetch("(http://10.0.2.2:3000/send-data", {
+            method: "post",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name, email, phone, password,
             })
-            
+        })
+
             // //For Web
             // fetch("http://localhost:3000/send-data", {
             //     method: "post",
@@ -61,6 +62,7 @@ const RegForm = ({ navigation, route }) => {
             })
     }
 
+
     return (
         <View style={styles.regForm}>
             {/* <Text style={styles.header}>Registration Form</Text> */}
@@ -73,40 +75,72 @@ const RegForm = ({ navigation, route }) => {
                     One
                 </Text>
             </View>
-            <TextInput style={styles.textInput}
+
+            <View style={styles.anotherOne}>
+                    <Icon
+                    name="drive-file-rename-outline"
+                    color={COLORS.light}
+                    size={20}
+                    // style={STYLES.inputIcon}
+                    style={styles.inputIcon}
+                    />
+                <TextInput style={styles.textInput}
                 placeholder="Enter your name"
                 label='name'
                 // value={name}
                 onChangeText={(name) => { setName(name) }}
                 underlineColorAndroid={'transparent'}
-            />
-            <TextInput style={styles.textInput}
+                />
+                <Icon
+                name="mail-outline"
+                color={COLORS.light}
+                size={20}
+                // style={STYLES.inputIcon}
+                style={styles.inputIconemail}
+                />
+                <TextInput style={styles.textInput}
                 placeholder="Enter your email"
                 label='email'
                 // value={email}
                 onChangeText={(email) => { setEmail(email) }}
                 underlineColorAndroid={'transparent'}
-            />
-            {/* Added after starting to make db */}
-            <TextInput style={styles.textInput}
+                />
+                {/* Added after starting to make db */}
+                <Icon
+                name="phone"
+                color={COLORS.light}
+                size={20}
+                // style={STYLES.inputIcon}
+                style={styles.inputIconphone}
+                />
+                <TextInput style={styles.textInput}
                 placeholder="Enter your phone"
                 label='phone'
                 // value={phone}
                 onChangeText={(phone) => { setPhone(phone) }}
                 underlineColorAndroid={'transparent'}
-            />
-            {/* Added after starting to make db */}
-            <TextInput style={styles.textInput}
+                />
+                {/* Added after starting to make db */}
+                <Icon
+                name="lock-outline"
+                color={COLORS.light}
+                size={20}
+                // style={STYLES.inputIcon}
+                style={styles.inputIconpassword}
+                />
+                <TextInput style={styles.textInput}
                 placeholder="Enter password"
                 label='password'
                 // value={password}
                 secureTextEntry={true}
                 onChangeText={(password) => { setPassword(password) }}
                 underlineColorAndroid={'transparent'}
-            />
+                />
+            </View>
+
             {/* <Drop/> */}
 
-            <TouchableOpacity>
+            <TouchableOpacity style={styles.btnStyling}>
                 <View style={STYLES.btnPrimary}>
                     <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 18 }}
                         onPress={() => submitData()}
@@ -138,6 +172,8 @@ const styles = StyleSheet.create({
         color: "#000",
         borderBottomColor: "#f8f8f8",
         borderBottomWidth: 1,
+        marginLeft: 30,
+        fontSize: 18,
     },
     button: {
         alignSelf: "stretch",
@@ -150,4 +186,37 @@ const styles = StyleSheet.create({
         color: "#fff",
         fontWeight: "bold"
     },
+    inputIcon: {
+        // marginTop: Platform.OS === 'android' ? 200 : -240,
+        marginTop: -240,
+        position: 'absolute'
+    },
+    inputIconemail: {
+        marginTop: -98,
+        position: 'absolute'
+    },
+    inputIconphone: {
+        marginTop: 41,
+        position: 'absolute'
+    },
+    inputIconpassword: {
+        marginTop: 180,
+        position: 'absolute'
+    },
+    btnStyling: {
+        display: "flex",
+        justifyContent: "center",
+    },
+    anotherOne: {
+        alignSelf: "center",
+        justifyContent: "center",
+        backgroundColor: "white",
+        width: 300,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: "lightgray",
+        borderRadius: 5,
+        // height: 300,
+        // width: Platform.OS === 'android' ? 300 : 400
+    }
 })
