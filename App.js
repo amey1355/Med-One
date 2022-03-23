@@ -5,22 +5,11 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import COLORS from './src/consts/color';
+import {createStore} from 'redux'
+import {Provider} from 'react-redux'
+import {reducer} from './reducers/reducer'
 
-// // // SideBar imports
-import profile from './assets/profile.png';
-// Tab ICons...
-import home from './assets/home.png';
-import search from './assets/search.png';
-import notifications from './assets/bell.png';
-import settings from './assets/settings.png';
-import logout from './assets/logout.png';
-// Menu
-import menu from './assets/menu.png';
-import close from './assets/close.png';
-// Photo
-import photo from './assets/photo.jpg';
-import Side from './src/components/Side';
-// // // SideBar imports
+const store  = createStore(reducer)
 
 import SignUp from './src/components/SignUp';
 import SignIn from './src/components/SignIn';
@@ -43,12 +32,12 @@ const Drawer = createDrawerNavigator();
 //   </Drawer.Navigator>)
 // }
 // Mix
-export default function App() {
+function App() {
   const Stack = createNativeStackNavigator();
   return (
 
     // Navigation
-    <NavigationContainer>
+    // <NavigationContainer>
       <Stack.Navigator initialRouteName="MedOne">
 
         <Stack.Screen name="SignUp" component={SignUp} />
@@ -66,12 +55,20 @@ export default function App() {
           }, headerTintColor: "white"
         }} name="MedOne" component={MedOne} />
       </Stack.Navigator>
-    </NavigationContainer>
+    // </NavigationContainer>
     // Navigation
 
   );
 }
-
+export default ()=>{
+  return (
+    <Provider store={store}>
+    <NavigationContainer>
+      <App />
+    </NavigationContainer>
+    </Provider>
+  )
+}
 const styles = StyleSheet.create({
 
   container: {

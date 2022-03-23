@@ -5,6 +5,7 @@ import {
     ImageBackground,
     Image,
     TouchableOpacity,
+    Button,
 } from 'react-native';
 import {
     DrawerContentScrollView,
@@ -37,10 +38,12 @@ import {
   } from '@expo-google-fonts/poppins'
 
   import { useFonts } from '@expo-google-fonts/poppins';
+// import { Item } from 'react-native-paper/lib/typescript/components/List/List';
   
   
 
 const CustomDrawer = (props) => {
+    
     const [isLoaded, setIsLoaded] = useState(true);
     let [fontsLoad, error] = useFonts({
         Poppins_100Thin,
@@ -66,7 +69,7 @@ const CustomDrawer = (props) => {
         <View style={{ flex: 1 }}>
             <DrawerContentScrollView
                 {...props}
-                contentContainerStyle={{ backgroundColor: "white", marginTop: -10, }}>
+                contentContainerStyle={{ backgroundColor: COLORS.secondary, marginTop: -10, }}>
                 <ImageBackground
                     source={require('../assets/menu-bg.png')}
                     style={{ padding: 20 }}>
@@ -76,16 +79,16 @@ const CustomDrawer = (props) => {
                             // alignSelf: "center" 
                         }}
                     />
+                    
                     <Text
-                        style={{
-                            color: '#fff',
-                            fontSize: 22,
-                            // fontFamily: 'Roboto-Regular',
-                            fontFamily: "Poppins_600SemiBold",
-                            marginBottom: -10,
-                            // alignSelf: "center"
-                            fontWeight: "bold",
-                        }}>
+                        style={{color: '#fff',
+                        fontSize: 22,
+                        // fontFamily: 'Roboto-Regular',
+                        // fontFamily: "Poppins_600SemiBold",
+                        marginBottom: -10,
+                        // alignSelf: "center"
+                        fontWeight: "bold",}}
+                        >
                         Mark Zukya
                     </Text>
                     <View style={{ flexDirection: 'row' }}>

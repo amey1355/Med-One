@@ -14,6 +14,40 @@ app.use(cors({
     origin: "*",
 }))
 
+// // Image upload section
+// require("dotenv").config();
+// const upload = require("./routes/upload");
+// const Grid = require("gridfs-stream");
+// let gfs;
+// mongoose.connection.once("open", function () {
+//     gfs = Grid(conn.db, mongoose.mongo);
+//     gfs.collection("photos");
+// });
+// app.use("/file", upload);
+// // media routes
+// app.get("/file/:filename", async (req, res) => {
+//     try {
+//         const file = await gfs.files.findOne({ filename: req.params.filename });
+//         const readStream = gfs.createReadStream(file.filename);
+//         readStream.pipe(res);
+//     } catch (error) {
+//         res.send("not found");
+//     }
+// });
+
+// app.delete("/file/:filename", async (req, res) => {
+//     try {
+//         await gfs.files.deleteOne({ filename: req.params.filename });
+//         res.send("success");
+//     } catch (error) {
+//         console.log(error);
+//         res.send("An error occured.");
+//     }
+// });
+// // Image upload section
+
+
+
 
 const Users = mongoose.model("users");
 const mongoUri = "mongodb+srv://amey:amey1355@cluster0.bsn6j.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
@@ -53,6 +87,7 @@ app.post('/send-data', (req, res) => {
         email: req.body.email,
         phone: req.body.phone,
         password: req.body.password,
+        picture: req.body.picture,
     })
     users.save()
         .then(data => {
@@ -83,6 +118,7 @@ app.post('/update', (req, res) => {
         email: req.body.email,
         phone: req.body.phone,
         password: req.body.password,
+        picture: req.body.picture,
     })
         .then(data => {
             console.log(data);

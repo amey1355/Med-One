@@ -21,6 +21,7 @@ import Booking from './Booking';
 import Medicines from './Medicines';
 import Camps from './Camps';
 import Wallet from './Wallet';
+import { Provider } from 'react-redux';
 
 const MedOne = () => {
   const Drawer = createDrawerNavigator();
@@ -35,15 +36,22 @@ const MedOne = () => {
         fontSize: 15,
       }
     }}>
-      
+
       <Drawer.Screen name="Home" component={HomePage} 
       options={{
         drawerIcon: ({color}) => (
           <Ionicons name="home-outline" size={22} color={color} />
-        ),
-      }}
-      />
-        <Drawer.Screen name="My Profile" component={MyProfile} 
+          ),
+        }}
+        />
+        <Drawer.Screen name="Profile" component={MyProfile} 
+        options={{
+          drawerIcon: ({color}) => (
+            <AntDesign name="profile" size={22} color={color} />
+          ),
+        }}
+        />
+        <Drawer.Screen name="My Profile" component={RegForm} 
         options={{
           drawerIcon: ({color}) => (
             <AntDesign name="profile" size={22} color={color} />
