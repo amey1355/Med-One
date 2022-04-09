@@ -44,7 +44,14 @@ const MedOne = () => {
           ),
         }}
         />
-        <Drawer.Screen name="Profile" component={MyProfile} 
+        <Drawer.Screen name="Sign In" component={SignIn} 
+        options={{
+          drawerIcon: ({color}) => (
+            <AntDesign name="user" size={22} color={color} />
+          ),
+        }}
+        />
+        <Drawer.Screen name="Profile Page" component={MyProfile} 
         options={{
           drawerIcon: ({color}) => (
             <AntDesign name="profile" size={22} color={color} />

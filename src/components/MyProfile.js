@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Image, Button, TextInput, Alert, FlatList, Platform } from 'react-native'
-import React,{useEffect,useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { LinearGradient } from 'expo-linear-gradient';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -8,144 +8,162 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import COLORS from '../consts/color';
-import {useSelector,useDispatch} from 'react-redux'
-const MyProfile = ({ navigation, route }) => {
+import { useSelector, useDispatch } from 'react-redux';
 
-  const dispatch  = useDispatch()
-    const {data,loading} =  useSelector((state)=>{
-        return state
-    })
 
-    console.log(data,loading)
-   
-     const fetchData = ()=>{
-        fetch("http://10.0.2.2:3000/")
-        .then(res=>res.json())
-        .then(results=>{
-    
-            // setData(results)
-            // setLoading(false)
-          dispatch({type:"ADD_DATA",payload:results})
-          dispatch({type:"SET_LOADING",payload:false})
+const MyProfile = ({ navigation, route, props }) => {
+  // const {_id,name,picture,phone,salary,email} = props.route.params.item
 
-        }).catch(err=>{
-            Alert.alert("someting went wrong")
-            console.log(err);
-        })
-     }
-    
-     useEffect(()=>{
-          fetchData()
-     },[])
+  const dispatch = useDispatch()
+  const { data, loading } = useSelector((state) => {
+    return state
+  })
 
-    const renderList = ((item)=>{
-      return(
-        <View style={{ backgroundColor: "white", }}>
-      <LinearGradient
-        colors={["#0033ff", "#6bc1ff"]}
-        style={{ height: "40%" }}
-      />
-      <View style={styles.secrootStyle}>
-        <Image
-          // source={require('../assets/user-profile.jpg')}
-          source={{uri:item.picture}}
-          style={{
-            height: 100, width: 100,
-            borderRadius: 10,
-            marginBottom: 10,
-            display: "flex",
-            alignSelf: "center",
-            marginTop: -50,
-            // alignSelf: "center" 
-          }}
+  console.log(data, loading)
+
+  const fetchData = () => {
+    //For Android
+    // fetch("http://10.0.2.2:3000/")
+    //   .then(res => res.json())
+    //   .then(results => {
+
+    //     // setData(results)
+    //     // setLoading(false)
+    //     dispatch({ type: "ADD_DATA", payload: results })
+    //     dispatch({ type: "SET_LOADING", payload: false })
+
+    //   }).catch(err => {
+    //     Alert.alert("someting went wrong")
+    //     console.log(err);
+    //   })
+      //For Web
+    fetch("http://localhost:3000/get-data")
+      .then(res => res.json())
+      .then(results => {
+
+        // setData(results)
+        // setLoading(false)
+        dispatch({ type: "ADD_DATA", payload: results })
+        dispatch({ type: "SET_LOADING", payload: false })
+
+      }).catch(err => {
+        Alert.alert("someting went wrong")
+        console.log(err);
+      })
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+  const renderList = ((item) => {
+    return (
+      <View style={{ backgroundColor: "white", }}>
+        <LinearGradient
+          colors={["#0033ff", "#6bc1ff"]}
+          style={{ height: "40%" }}
         />
-        <Text style={styles.textStyle}
-          // placeholder="Enter your fname"
-          label='fname'
-          // value={fname}
-          onChangeText={(name) => { setName(name) }}
-          underlineColorAndroid={'transparent'}
-        >
-          {/* <AntDesign style={{marginLeft: 50,}} name="user" size={22} /> */}
-          First Name
-        </Text>
-        <Text style={styles.lnametextStyle}
-          // placeholder="Enter your lname"
-          label='lname'
-          // value={lname}
-          onChangeText={(name) => { setName(name) }}
-          underlineColorAndroid={'transparent'}
-        >
-          {/* <AntDesign style={{marginLeft: 50,}} name="user" size={22} /> */}
-          Last Name
-        </Text>
-        <Text style={styles.emailtextStyle}
-          // placeholder="Enter your email"
-          label='email'
-          // value={email}
-          onChangeText={(name) => { setName(name) }}
-          underlineColorAndroid={'transparent'}
-        >
-          {/* <AntDesign style={{marginLeft: 50,}} name="user" size={22} /> */}
-          Email
-        </Text>
-        <Text style={styles.emailtextStyle}
-          // placeholder="Enter your phone"
-          label='phone'
-          // value={name}
-          onChangeText={(name) => { setName(name) }}
-          underlineColorAndroid={'transparent'}
-        >
-          {/* <AntDesign style={{marginLeft: 50,}} name="user" size={22} /> */}
-          Phone Number
-        </Text>
-        <Text style={styles.emailtextStyle}
-          // placeholder="Enter your address"
-          label='address'
-          // value={address}
-          onChangeText={(name) => { setName(name) }}
-          underlineColorAndroid={'transparent'}
-        >
-          {/* <AntDesign style={{marginLeft: 50,}} name="user" size={22} /> */}
-          Address
-        </Text>
-        <Text style={{ marginLeft: 16, fontSize: 15, marginTop: 10, }}>Gender</Text>
-        <Text style={[styles.emailtextStyle, styles.mgtextStyle]}
-          // placeholder="Enter your address"
-          label='address'
-          // value={name}
-          onChangeText={(name) => { setName(name) }}
-          underlineColorAndroid={'transparent'}
-        >
-          {/* <AntDesign style={{marginLeft: 50,}} name="user" size={22} /> */}
-          Male
-        </Text>
-        <Text style={[styles.emailtextStyle, styles.fgtextStyle]}
-          // placeholder="Enter your address"
-          label='male'
-          // value={female}
-          onChangeText={(name) => { setName(name) }}
-          underlineColorAndroid={'transparent'}
-        >
-          {/* <AntDesign style={{marginLeft: 50,}} name="user" size={22} /> */}
-          Female
-        </Text>
+        <View style={styles.secrootStyle}>
+          <Image
+            // source={require('../assets/user-profile.jpg')}
+            source={{ uri: item.picture }}
+            style={{
+              height: 100, width: 100,
+              borderRadius: 10,
+              marginBottom: 10,
+              display: "flex",
+              alignSelf: "center",
+              marginTop: -50,
+              // alignSelf: "center" 
+            }}
+          />
+          <Text style={styles.textStyle}
+            // placeholder="Enter your fname"
+            label='fname'
+            value={item.name}
+            onChangeText={(name) => { setName(name) }}
+            underlineColorAndroid={'transparent'}
+          >
+            {/* <AntDesign style={{marginLeft: 50,}} name="user" size={22} /> */}
 
+          </Text>
+          <Text style={styles.lnametextStyle}
+            // placeholder="Enter your lname"
+            label='lname'
+            value={item.name}
+            onChangeText={(name) => { setName(name) }}
+            underlineColorAndroid={'transparent'}
+          >
+            {/* <AntDesign style={{marginLeft: 50,}} name="user" size={22} /> */}
+
+          </Text>
+          <Text style={styles.emailtextStyle}
+            // placeholder="Enter your email"
+            label='email'
+            value={item.email}
+            onChangeText={(name) => { setName(name) }}
+            underlineColorAndroid={'transparent'}
+          >
+            {/* <AntDesign style={{marginLeft: 50,}} name="user" size={22} /> */}
+
+          </Text>
+          <Text style={styles.emailtextStyle}
+            // placeholder="Enter your phone"
+            label='phone'
+            value={item.phone}
+            onChangeText={(name) => { setName(name) }}
+            underlineColorAndroid={'transparent'}
+          >
+            {/* <AntDesign style={{marginLeft: 50,}} name="user" size={22} /> */}
+
+          </Text>
+          <Text style={styles.emailtextStyle}
+            // placeholder="Enter your address"
+            label='address'
+            value={address}
+            onChangeText={(name) => { setName(name) }}
+            underlineColorAndroid={'transparent'}
+          >
+            {/* <AntDesign style={{marginLeft: 50,}} name="user" size={22} /> */}
+            Address
+          </Text>
+          <Text style={{ marginLeft: 16, fontSize: 15, marginTop: 10, }}>Gender</Text>
+          <Text style={[styles.emailtextStyle, styles.mgtextStyle]}
+            // placeholder="Enter your address"
+            label='address'
+            // value={name}
+            onChangeText={(name) => { setName(name) }}
+            underlineColorAndroid={'transparent'}
+          >
+            {/* <AntDesign style={{marginLeft: 50,}} name="user" size={22} /> */}
+            Male
+          </Text>
+          <Text style={[styles.emailtextStyle, styles.fgtextStyle]}
+            // placeholder="Enter your address"
+            label='male'
+            // value={female}
+            onChangeText={(name) => { setName(name) }}
+            underlineColorAndroid={'transparent'}
+          >
+            {/* <AntDesign style={{marginLeft: 50,}} name="user" size={22} /> */}
+            Female
+          </Text>
+
+        </View>
       </View>
-    </View>
-      )
+    )
   })
   return (
     <View>
       <FlatList
-              data={data}
-              renderItem={({item})=>{
-                return renderList(item)
-              }}
-              keyExtractor={item=>item._id}
-              onRefresh={()=>fetchData()}
-              refreshing={loading}
-              />
+        data={data}
+        renderItem={({ item }) => {
+          return renderList(item)
+        }}
+        keyExtractor={item => item._id}
+        onRefresh={() => fetchData()}
+        refreshing={loading}
+      />
     </View>
   )
 }

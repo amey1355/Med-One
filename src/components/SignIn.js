@@ -25,6 +25,13 @@ const SignIn = ({ navigation }) => {
         }
     }
 
+    //Login Functionality:
+    const handleLogin = (credentials) => {
+
+    }
+    //Login Functionality
+
+
     return (
         <SafeAreaView
             style={{ paddingHorizontal: 20, flex: 1, backgroundColor: COLORS.white }}>
