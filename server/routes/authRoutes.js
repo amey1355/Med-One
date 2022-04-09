@@ -4,17 +4,17 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 require("../signUpUsers.js")
 require("../Users.js")
-const User = mongoose.model('users');
+const Users = mongoose.model('users');
 const signUpusers = mongoose.model('signUpusers');
 
-
+// router.set('view-engine', 'ejs');
 router.post("/signup", (req, res) => {
   // res.send("Welcome to MedOne from Router");
   console.log(req.body);
   const { email, password } = req.body;
   const suser = new signUpusers({ email, password });
   suser.save();
-  res.send("Hello");
+  // res.send("Hello");
 });
 
 //login check
@@ -39,7 +39,8 @@ router.post("/login", async (req, res) => {
       // });
 
       if (isMatch) {
-          res.status(201).render("Logged In successfully");
+          res.status(201).render("login.ejs");
+          console.log("Done");
       }
       else {
           res.send("Credentials not matching");

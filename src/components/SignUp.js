@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import { React, useState } from 'react';
-import { SafeAreaView, View, Text, TextInput, Image } from 'react-native';
+import { SafeAreaView, View, Text, TextInput, Image, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../consts/color';
 import STYLES from '../styles';
@@ -10,6 +10,7 @@ const SignUp = ({ navigation }) => {
 
     const [userName, setUserName] = useState("");
     const [emailId, setEmailId] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     // const [agree, setAgree] = useState(false);
 
@@ -24,6 +25,41 @@ const SignUp = ({ navigation }) => {
         }
     }
 
+    const signUpData = () => {
+        // fetch("http://10.0.2.2:3000/signup", {
+
+        //     method: "post",
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({
+        //         email,
+        //         password,
+        //     })
+        // })
+            fetch("http://localhost:3000/signup", {
+                method: "post",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email,
+                    password,
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                // Alert.alert(`${data.name} is saved successfuly`)
+                // Alert.alert(JSON.stringify(`${data.name} is saved successfully`));
+                Alert.alert(JSON.stringify(`saved successfully`));
+                // navigation.navigate("Home")
+            })
+            .catch(err => {
+                //   Alert.alert("someting went wrong", err)
+                Alert.alert(JSON.stringify("Something went wrong while sign up", err));
+                console.log(err);
+            })
+    }
     return (
         <SafeAreaView
             style={{ paddingHorizontal: 20, flex: 1, backgroundColor: COLORS.white }}>
@@ -47,7 +83,7 @@ const SignUp = ({ navigation }) => {
                 </View>
                 <View style={{ marginTop: 20 }}>
                     <View style={STYLES.inputContainer}>
-                        <Icon
+                        {/* <Icon
                             name="person-outline"
                             color={COLORS.light}
                             size={20}
@@ -58,7 +94,7 @@ const SignUp = ({ navigation }) => {
                             autoCorrect={false}
                             value={userName}
                             onChangeText={(actualData) => setUserName(actualData)}
-                        />
+                        /> */}
                     </View>
                     <View style={STYLES.inputContainer}>
                         <Icon
@@ -70,8 +106,8 @@ const SignUp = ({ navigation }) => {
                         <TextInput placeholder="Email" style={STYLES.input}
                             autoCapitalize='none'
                             autoCorrect={false}
-                            value={emailId}
-                            onChangeText={(actualData) => setEmailId(actualData)}
+                            label={email}
+                            onChangeText={(actualData) => setEmail(actualData)}
                         />
                     </View>
                     <View style={STYLES.inputContainer}>
@@ -87,13 +123,14 @@ const SignUp = ({ navigation }) => {
                             autoCapitalize='none'
                             autoCorrect={false}
                             secureTextEntry={true}
-                            value={password}
+                            label={password}
                             onChangeText={(actualData) => setPassword(actualData)}
                         />
                     </View>
                     <View style={STYLES.btnPrimary}>
                         <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 18 }}
-                        onPress={() => submit()}
+                            // onPress={() => submit()}
+                            onPress={() => signUpData()}
                         >
                             Sign Up
                         </Text>

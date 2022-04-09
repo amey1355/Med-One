@@ -80,21 +80,7 @@ const RegForm = ({ navigation, route }) => {
 
     //Update and pic
     const updateDetails = ()=>{
-        fetch("http://10.0.2.2:3000/update",{
-            method:"post",
-            headers:{
-              'Content-Type': 'application/json'
-            },
-            body:JSON.stringify({
-                id:route.params._id,
-                name,
-                email,
-                phone,
-                password,
-                picture,
-            })
-        })
-        // fetch("http://localhost:3000/update",{
+        // fetch("http://10.0.2.2:3000/update",{
         //     method:"post",
         //     headers:{
         //       'Content-Type': 'application/json'
@@ -108,6 +94,20 @@ const RegForm = ({ navigation, route }) => {
         //         picture,
         //     })
         // })
+        fetch("http://localhost:3000/update",{
+            method:"post",
+            headers:{
+              'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({
+                id:route.params._id,
+                name,
+                email,
+                phone,
+                password,
+                picture,
+            })
+        })
         .then(res=>res.json())
         .then(data=>{
             Alert.alert(`${data.name} is updated successfuly`)

@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import { React, useState } from 'react';
-import { SafeAreaView, View, Text, TextInput, Image } from 'react-native';
+import { SafeAreaView, View, Text, TextInput, Image, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../consts/color';
 import STYLES from '../styles';
@@ -9,9 +9,10 @@ import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 // API
 // import axios from 'axios';
 
-const SignIn = ({ navigation }) => {
+const SignIn = ({ navigation, route }) => {
 
     const [userName, setUserName] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const submit = () => {
@@ -26,8 +27,41 @@ const SignIn = ({ navigation }) => {
     }
 
     //Login Functionality:
-    const handleLogin = (credentials) => {
+    const handleLogin = () => {
+        // fetch("http://10.0.2.2:3000/login", {
+        //     method: "post",
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({
+        //         email,
+        //         password,
 
+        //     })
+        // })
+            fetch("http://localhost:3000/login", {
+                method: "post",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email,
+                    password,
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                // Alert.alert(`${data.name} is saved successfuly`)
+                // Alert.alert(JSON.stringify(`${data.name} is saved successfully`));
+                Alert.alert(JSON.stringify(`saved successfully`));
+                navigation.navigate('SignUp');
+                console.log("Successfully Done sign in");
+            })
+            .catch(err => {
+                  Alert.alert("someting went wrong")
+                // Alert.alert(JSON.stringify(`Something went wrong while SIGNING IN`, err));
+                // console.log(err);
+            })
     }
     //Login Functionality
 
@@ -66,8 +100,8 @@ const SignIn = ({ navigation }) => {
                         <TextInput placeholder="Email" style={STYLES.input}
                             autoCapitalize='none'
                             autoCorrect={false}
-                            value={userName}
-                            onChangeText={(actualData) => setUserName(actualData)}
+                            label={email}
+                            onChangeText={(actualData) => setEmail(actualData)}
                         />
                     </View>
                     <View style={STYLES.inputContainer}>
@@ -83,13 +117,13 @@ const SignIn = ({ navigation }) => {
                             autoCapitalize='none'
                             autoCorrect={false}
                             secureTextEntry={true}
-                            value={password}
+                            label={password}
                             onChangeText={(actualData) => setPassword(actualData)}
                         />
                     </View>
                     <View style={STYLES.btnPrimary}>
                         <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 18 }}
-                            onPress={() => submit()}
+                            onPress={() => handleLogin()}
                         >
                             Sign In
                         </Text>
