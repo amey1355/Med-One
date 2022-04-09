@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../consts/color';
 import STYLES from '../styles';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 
 // API
 // import axios from 'axios';
@@ -14,17 +15,17 @@ const SignIn = ({ navigation, route }) => {
     const [userName, setUserName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
-    const submit = () => {
-        // return Alert.alert(userName, password);
-        if (userName === "ameysawant@gmail.com" && password === "ameysawant") {
-            alert(`Thank You ${userName}`);
-            navigation.navigate("Home", { myName: `${userName.replace(/@[^@]+$/, '')}` })
-        }
-        else {
-            alert(`Username and Password is not correct`);
-        }
-    }
+    // const navigation = useNavigation();
+    // const submit = () => {
+    //     // return Alert.alert(userName, password);
+    //     if (userName === "ameysawant@gmail.com" && password === "ameysawant") {
+    //         alert(`Thank You ${userName}`);
+    //         navigation.navigate("Home", { myName: `${userName.replace(/@[^@]+$/, '')}` })
+    //     }
+    //     else {
+    //         alert(`Username and Password is not correct`);
+    //     }
+    // }
 
     //Login Functionality:
     const handleLogin = () => {
@@ -49,13 +50,13 @@ const SignIn = ({ navigation, route }) => {
                     password,
                 })
             })
-            .then(res => res.json())
-            .then(data => {
+            .then(() => {
                 // Alert.alert(`${data.name} is saved successfuly`)
                 // Alert.alert(JSON.stringify(`${data.name} is saved successfully`));
-                Alert.alert(JSON.stringify(`saved successfully`));
-                navigation.navigate('SignUp');
-                console.log("Successfully Done sign in");
+                // Alert.alert(JSON.stringify(`saved successfully`));
+                // alert("Done With Logg")
+                navigation.navigate('Home');
+                // console.log("Successfully Done sign in");
             })
             .catch(err => {
                   Alert.alert("someting went wrong")

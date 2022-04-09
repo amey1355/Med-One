@@ -27,8 +27,9 @@ app.use(
 
 const Users = mongoose.model("users");
 const authRoutes = require('./routes/authRoutes');
-const signUpusers = require('./signUpUsers');
-app.use(authRoutes);
+// const signUpusers = require('./signUpUsers');
+const signUpusers = mongoose.model('signUpusers');
+// app.use(authRoutes);
 
 const mongoUri =
   "mongodb+srv://amey:amey1355@cluster0.bsn6j.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
@@ -119,40 +120,43 @@ app.post("/signup", (req, res) => {
 });
 
 //login check
-
-// app.post("/login", async (req, res) => {
-//   try {
-
-//       const email = req.body.email;
-//       const password = req.body.password;
-
-//       const useremail = await signUpusers.findOne({ email: email });
-
-//       const isMatch = await bcrypt.compare(password, useremail.password);
-
-//       // const token = await useremail.generateAuthToken();
-//       // console.log("the token part: " + token);
-
-//       // res.cookie("jwt", token, {
-//       //     expires: new Date(Date.now() + 600000), //expires in 10 minutes
-//       //     httpOnly: true
-
-//       // });
-
-//       if (isMatch) {
-//           res.status(201).send("Hello Done");
-//       }
-//       else {
-//           res.send("Credentials not matching");
-//       }
-//   }
-//   catch (error) {
-//       res.status(400).send("Invalid Email");
-//       console.log(error);
-//   }
+// app.get("/login", (req, res) => {
+//   res.render("login.ejs")
 // })
 
-// // AuthRoutes Section
+app.post("/login", async (req, res) => {
+  try {
+
+      const email = req.body.email;
+      const password = req.body.password;
+
+      const useremail = await signUpusers.findOne({ email: email });
+
+      const isMatch = await bcrypt.compare(password, useremail.password);
+
+      // const token = await useremail.generateAuthToken();
+      // console.log("the token part: " + token);
+
+      // res.cookie("jwt", token, {
+      //     expires: new Date(Date.now() + 600000), //expires in 10 minutes
+      //     httpOnly: true
+
+      // });
+
+      if (isMatch) {
+          res.status(201).render("login.ejs");
+          console.log("Done");
+      }
+      else {
+          res.send("Credentials not matching");
+      }
+  }
+  catch (error) {
+      res.status(400).send("Invalid Email");
+      console.log(error);
+  }
+})
+//login check
 
 
 app.listen(3000, () => {
