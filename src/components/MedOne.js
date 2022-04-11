@@ -18,7 +18,8 @@ import SignIn from './SignIn';
 import SignUp from './SignUp';
 import RegForm from './RegForm';
 import Booking from './Booking';
-import Medicines from './Medicines';
+// import Medicines from './Medicines';
+import MedsHome from'../screens/Home';
 import Camps from './Camps';
 import Wallet from './Wallet';
 import { Provider } from 'react-redux';
@@ -79,7 +80,7 @@ const MedOne = () => {
           ),
         }}
         />
-        <Drawer.Screen name="Medicines" component={Medicines}
+        <Drawer.Screen name="Medicines" component={MedsHome}
         options={{
           drawerIcon: ({color}) => (
             <AntDesign name="medicinebox" size={22} color={color} />

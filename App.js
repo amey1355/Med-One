@@ -2,7 +2,7 @@ import 'react-native-gesture-handler';
 import React, { useRef, useState } from 'react';
 import { Animated, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import COLORS from './src/consts/color';
 import {createStore} from 'redux'
@@ -32,18 +32,41 @@ const Drawer = createDrawerNavigator();
 //   </Drawer.Navigator>)
 // }
 // Mix
+
+// Medicines Page Import Start
+import { useFonts } from "expo-font";
+
+import Home from "./src/screens/Home";
+import Details from "./src/screens/Details";
+// Medicines Page Import End
+// Medicines Page theme Start
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: "transparent",
+  },
+};
+
+// Medicines Page theme End
+
 function App() {
   const Stack = createNativeStackNavigator();
   return (
 
     // Navigation
     // <NavigationContainer>
-      <Stack.Navigator initialRouteName="MedOne">
+      <Stack.Navigator initialRouteName="MedOne" theme={theme}>
 
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="RegForm" component={RegForm} />
         <Stack.Screen name="Home" component={HomePage} />
+        {/* Meds Page */}
+        <Stack.Screen name="MedsHome" component={Home} />
+        <Stack.Screen name="Details" component={Details} />
+        {/* Meds Page */}
+
         {/* <Stack.Screen name="Side" component={Side} /> */}
         {/* <Drawer.Navigator initialRouteName="Home">
           <Drawer.Screen name="Home" component={HomePage} />
