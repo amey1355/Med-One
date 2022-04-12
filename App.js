@@ -38,6 +38,7 @@ import { useFonts } from "expo-font";
 
 import Home from "./src/screens/Home";
 import Details from "./src/screens/Details";
+import MyProfile from './src/components/MyProfile';
 // Medicines Page Import End
 // Medicines Page theme Start
 const theme = {
@@ -62,6 +63,7 @@ function App() {
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="RegForm" component={RegForm} />
         <Stack.Screen name="Home" component={HomePage} />
+        <Stack.Screen name="MyProfile" component={MyProfile} />
         {/* Meds Page */}
         <Stack.Screen name="MedsHome" component={Home} />
         <Stack.Screen name="Details" component={Details} />

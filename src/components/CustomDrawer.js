@@ -1,4 +1,4 @@
-import {React, useState} from 'react';
+import { React, useState } from 'react';
 import {
     View,
     Text,
@@ -13,11 +13,15 @@ import {
     DrawerItemList,
 } from '@react-navigation/drawer';
 
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import COLORS from '../consts/color';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Entypo from 'react-native-vector-icons/Entypo';
+import Fontisto from 'react-native-vector-icons/Fontisto';
 
-import { 
+import {
     Poppins_100Thin,
     Poppins_100Thin_Italic,
     Poppins_200ExtraLight,
@@ -35,16 +39,16 @@ import {
     Poppins_800ExtraBold,
     Poppins_800ExtraBold_Italic,
     Poppins_900Black,
-    Poppins_900Black_Italic 
-  } from '@expo-google-fonts/poppins'
+    Poppins_900Black_Italic
+} from '@expo-google-fonts/poppins'
 
-  import { useFonts } from '@expo-google-fonts/poppins';
+import { useFonts } from '@expo-google-fonts/poppins';
 // import { Item } from 'react-native-paper/lib/typescript/components/List/List';
-  
-  
+
+
 
 const CustomDrawer = (props) => {
-    
+const {navigation} = props
     const [isLoaded, setIsLoaded] = useState(true);
     let [fontsLoad, error] = useFonts({
         Poppins_100Thin,
@@ -67,7 +71,7 @@ const CustomDrawer = (props) => {
         Poppins_900Black_Italic
     });
 
-    const handleLogout = ( email, password) => {
+    const handleLogout = (email, password) => {
         //For Android
         // fetch("http://10.0.2.2:3000/logout", {
         //     method: "post",
@@ -81,16 +85,16 @@ const CustomDrawer = (props) => {
         //     })
         // })
         //For Windows
-            fetch("http://localhost:3000/logout", {
-                method: "post",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email,
-                    password,
-                })
+        fetch("http://localhost:3000/logout", {
+            method: "post",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email,
+                password,
             })
+        })
             .then(() => {
                 // Alert.alert(`${data.name} is saved successfuly`)
                 // Alert.alert(JSON.stringify(`${data.name} is saved successfully`));
@@ -100,7 +104,7 @@ const CustomDrawer = (props) => {
                 // console.log("Successfully Done sign in");
             })
             .catch(err => {
-                  Alert.alert("someting went wrong")
+                Alert.alert("someting went wrong")
                 // Alert.alert(JSON.stringify(`Something went wrong while SIGNING IN`, err));
                 console.log(err);
             })
@@ -115,23 +119,30 @@ const CustomDrawer = (props) => {
                     style={{ padding: 20 }}>
                     <Image
                         source={require('../assets/user-profile.jpg')}
-                        style={{ height: 80, width: 80, borderRadius: 40, marginBottom: 10, 
+                        style={{
+                            height: 80, width: 80, borderRadius: 40, marginBottom: 10,
                             // alignSelf: "center" 
                         }}
                     />
-                    
-                    <Text
-                        style={{color: '#fff',
-                        fontSize: 22,
-                        // fontFamily: 'Roboto-Regular',
-                        // fontFamily: "Poppins_600SemiBold",
-                        marginBottom: -10,
-                        // alignSelf: "center"
-                        fontWeight: "bold",}}
+
+                    <TouchableOpacity onPress={() => navigation.navigate("MyProfile")}>
+
+                        <Text
+                            style={{
+                                color: '#fff',
+                                fontSize: 22,
+                                // fontFamily: 'Roboto-Regular',
+                                // fontFamily: "Poppins_600SemiBold",
+                                marginBottom: -10,
+                                // alignSelf: "center"
+                                fontWeight: "bold",
+                            }}
                         >
-                        {/* Mark Zukya */}
-                        User
-                    </Text>
+                            {/* Mark Zukya */}
+                            User
+                        </Text>
+                        <Entypo style={{ marginLeft: 200, marginTop: -15, display: "flex", alignSelf: "flex-end" }} name="pencil" size={22} color="white" />
+                    </TouchableOpacity>
                     <View style={{ flexDirection: 'row' }}>
                         {/* <Text
                             style={{
@@ -163,7 +174,7 @@ const CustomDrawer = (props) => {
                         </Text>
                     </View>
                 </TouchableOpacity> */}
-                <TouchableOpacity onPress={() => {handleLogout()}} style={{ paddingVertical: 15 }}>
+                <TouchableOpacity onPress={() => { handleLogout() }} style={{ paddingVertical: 15 }}>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <Ionicons name="exit-outline" size={22} />
                         <Text

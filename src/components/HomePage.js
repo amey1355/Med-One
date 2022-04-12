@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Button } from 'react-native'
+import { StyleSheet, Text, View, Button, ImageBackground, Image } from 'react-native'
 import React from 'react'
 import InfoSlider from './InfoSlider';
 import COLORS from '../consts/color';
@@ -9,12 +9,13 @@ const HomePage = ({ route, navigation }) => {
 
     return (
         <View style={[styles.mainContainer]}>
+
             {/* <Text style={[styles.mainHeader]}> Welcome To 
             {myName.replace(/@[^@]+$/, '')} 
-            </Text> */}
+        </Text> */}
             <View style={{ flexDirection: 'row', marginTop: 20, display: "flex", alignSelf: "center", justifyContent: "center" }}>
-                <Text style={[styles.mainHeader, { fontWeight: 'bold'}]}>Welcome To </Text>
-                <Text style={[{ fontWeight: 'bold', fontSize: 34, color: COLORS.dark }, { display: "flex",alignSelf: "center", justifyContent: "center" }]}>
+                <Text style={[styles.mainHeader, { fontWeight: 'bold' }]}>Welcome To </Text>
+                <Text style={[{ fontWeight: 'bold', fontSize: 34, color: COLORS.dark }, { display: "flex", alignSelf: "center", justifyContent: "center" }]}>
                     Med
                 </Text>
                 <Text
@@ -36,11 +37,30 @@ const HomePage = ({ route, navigation }) => {
                     It's just like how we order food from our favourite hotel or from the hotel where the particular item is available. Patients/Users will get notifications of events such as free health check-up, blood donation, etc. They will be rewarded after attending those events.
                 </Text>
 
+                <View style={{display: "flex", justifyContent: "space-around",  flexDirection: "row",}}>
+                    <Image
+                        source={require('../assets/images/bed_background.png')}
+                        style={{
+                            height: 200, width: 200, borderRadius: 40, marginBottom: 10,
+                            // alignSelf: "center" 
+                        }}
+                    />
+                    <Image
+                        source={require('../assets/images/bed_background.png')}
+                        style={{
+                            // height: 200, width: 200, borderRadius: 40, marginBottom: 10, marginTop: -210, marginLeft: 200,
+                            height: 200, width: 200, borderRadius: 40, marginBottom: 10,
+                            // alignSelf: "center" 
+                        }}
+                    />
+                </View>
+
                 {/* <Button title="Go Back" 
             onPress={() => navigation.goBack()}
         /> */}
             </View>
         </View>
+
     )
 }
 
@@ -53,6 +73,7 @@ const styles = StyleSheet.create({
         display: "flex",
         // justifyContent: "center",
         // alignItems: "center",
+        backgroundColor: "white"
     },
     mainHeader: {
         fontSize: 35,

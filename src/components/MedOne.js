@@ -52,13 +52,13 @@ const MedOne = () => {
           ),
         }}
         />
-        <Drawer.Screen name="Profile Page" component={MyProfile} 
+        {/* <Drawer.Screen name="Profile Page" component={MyProfile} 
         options={{
           drawerIcon: ({color}) => (
             <AntDesign name="profile" size={22} color={color} />
           ),
         }}
-        />
+        /> */}
         <Drawer.Screen name="My Profile" component={RegForm} 
         options={{
           drawerIcon: ({color}) => (
