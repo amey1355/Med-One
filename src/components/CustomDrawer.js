@@ -129,7 +129,8 @@ const CustomDrawer = (props) => {
                         // alignSelf: "center"
                         fontWeight: "bold",}}
                         >
-                        Mark Zukya
+                        {/* Mark Zukya */}
+                        User
                     </Text>
                     <View style={{ flexDirection: 'row' }}>
                         {/* <Text

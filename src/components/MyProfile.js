@@ -36,7 +36,7 @@ const MyProfile = ({ navigation, route, props }) => {
     //     Alert.alert("someting went wrong")
     //     console.log(err);
     //   })
-      //For Web
+    //For Web
     fetch("http://localhost:3000/get-data")
       .then(res => res.json())
       .then(results => {
@@ -77,6 +77,7 @@ const MyProfile = ({ navigation, route, props }) => {
               // alignSelf: "center" 
             }}
           />
+
           <Text style={styles.textStyle}
             // placeholder="Enter your fname"
             label='fname'
@@ -85,6 +86,7 @@ const MyProfile = ({ navigation, route, props }) => {
             underlineColorAndroid={'transparent'}
           >
             {/* <AntDesign style={{marginLeft: 50,}} name="user" size={22} /> */}
+            {item.name}
 
           </Text>
           <Text style={styles.lnametextStyle}
@@ -95,7 +97,7 @@ const MyProfile = ({ navigation, route, props }) => {
             underlineColorAndroid={'transparent'}
           >
             {/* <AntDesign style={{marginLeft: 50,}} name="user" size={22} /> */}
-
+            {item.name}
           </Text>
           <Text style={styles.emailtextStyle}
             // placeholder="Enter your email"
@@ -105,33 +107,34 @@ const MyProfile = ({ navigation, route, props }) => {
             underlineColorAndroid={'transparent'}
           >
             {/* <AntDesign style={{marginLeft: 50,}} name="user" size={22} /> */}
-
+            {item.email}
           </Text>
           <Text style={styles.emailtextStyle}
-            // placeholder="Enter your phone"
+            placeholder="Enter your phone"
             label='phone'
             value={item.phone}
             onChangeText={(name) => { setName(name) }}
             underlineColorAndroid={'transparent'}
           >
             {/* <AntDesign style={{marginLeft: 50,}} name="user" size={22} /> */}
+            {item.phone}
 
           </Text>
           <Text style={styles.emailtextStyle}
             // placeholder="Enter your address"
             label='address'
-            value={address}
+            value={item.address}
             onChangeText={(name) => { setName(name) }}
             underlineColorAndroid={'transparent'}
           >
             {/* <AntDesign style={{marginLeft: 50,}} name="user" size={22} /> */}
-            Address
+            {item.address}
           </Text>
           <Text style={{ marginLeft: 16, fontSize: 15, marginTop: 10, }}>Gender</Text>
           <Text style={[styles.emailtextStyle, styles.mgtextStyle]}
             // placeholder="Enter your address"
             label='address'
-            // value={name}
+            value={item.address}
             onChangeText={(name) => { setName(name) }}
             underlineColorAndroid={'transparent'}
           >
@@ -139,7 +142,7 @@ const MyProfile = ({ navigation, route, props }) => {
             Male
           </Text>
           <Text style={[styles.emailtextStyle, styles.fgtextStyle]}
-            // placeholder="Enter your address"
+            // placeholder="Enter your gender"
             label='male'
             // value={female}
             onChangeText={(name) => { setName(name) }}
