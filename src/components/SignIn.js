@@ -11,7 +11,6 @@ import { useNavigation } from '@react-navigation/native';
 // import axios from 'axios';
 
 const SignIn = ({ navigation, route }) => {
-
     const [userName, setUserName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -29,6 +28,7 @@ const SignIn = ({ navigation, route }) => {
 
     //Login Functionality:
     const handleLogin = () => {
+        //For Android
         // fetch("http://10.0.2.2:3000/login", {
         //     method: "post",
         //     headers: {
@@ -40,6 +40,7 @@ const SignIn = ({ navigation, route }) => {
 
         //     })
         // })
+        //For Windows
             fetch("http://localhost:3000/login", {
                 method: "post",
                 headers: {
@@ -56,17 +57,18 @@ const SignIn = ({ navigation, route }) => {
                 // Alert.alert(JSON.stringify(`saved successfully`));
                 // alert("Done With Logg")
                 navigation.navigate('Home');
+                // navigation.navigate('Home',  { email: `${email}` });
                 // console.log("Successfully Done sign in");
             })
             .catch(err => {
                   Alert.alert("someting went wrong")
                 // Alert.alert(JSON.stringify(`Something went wrong while SIGNING IN`, err));
-                // console.log(err);
+                console.log(err);
             })
     }
     //Login Functionality
 
-
+    
     return (
         <SafeAreaView
             style={{ paddingHorizontal: 20, flex: 1, backgroundColor: COLORS.white }}>

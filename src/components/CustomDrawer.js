@@ -6,6 +6,7 @@ import {
     Image,
     TouchableOpacity,
     Button,
+    Alert
 } from 'react-native';
 import {
     DrawerContentScrollView,
@@ -65,6 +66,45 @@ const CustomDrawer = (props) => {
         Poppins_900Black,
         Poppins_900Black_Italic
     });
+
+    const handleLogout = ( email, password) => {
+        //For Android
+        // fetch("http://10.0.2.2:3000/logout", {
+        //     method: "post",
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({
+        //         email,
+        //         password,
+
+        //     })
+        // })
+        //For Windows
+            fetch("http://localhost:3000/logout", {
+                method: "post",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email,
+                    password,
+                })
+            })
+            .then(() => {
+                // Alert.alert(`${data.name} is saved successfuly`)
+                // Alert.alert(JSON.stringify(`${data.name} is saved successfully`));
+                // Alert.alert(JSON.stringify(`saved successfully`));
+                // alert("Done With Logg")
+                navigation.navigate('Home');
+                // console.log("Successfully Done sign in");
+            })
+            .catch(err => {
+                  Alert.alert("someting went wrong")
+                // Alert.alert(JSON.stringify(`Something went wrong while SIGNING IN`, err));
+                console.log(err);
+            })
+    }
     return (
         <View style={{ flex: 1 }}>
             <DrawerContentScrollView
@@ -122,7 +162,7 @@ const CustomDrawer = (props) => {
                         </Text>
                     </View>
                 </TouchableOpacity> */}
-                <TouchableOpacity onPress={() => { }} style={{ paddingVertical: 15 }}>
+                <TouchableOpacity onPress={() => {handleLogout()}} style={{ paddingVertical: 15 }}>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <Ionicons name="exit-outline" size={22} />
                         <Text

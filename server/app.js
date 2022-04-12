@@ -134,14 +134,14 @@ app.post("/login", async (req, res) => {
 
       const isMatch = await bcrypt.compare(password, useremail.password);
 
-      // const token = await useremail.generateAuthToken();
-      // console.log("the token part: " + token);
+      const token = await useremail.generateAuthToken();
+      console.log("the token part: " + token);
 
-      // res.cookie("jwt", token, {
-      //     expires: new Date(Date.now() + 600000), //expires in 10 minutes
-      //     httpOnly: true
+      res.cookie("jwt", token, {
+          expires: new Date(Date.now() + 600000), //expires in 10 minutes
+          httpOnly: true
 
-      // });
+      });
 
       if (isMatch) {
           res.status(201).render("login.ejs");
@@ -158,6 +158,29 @@ app.post("/login", async (req, res) => {
 })
 //login check
 
+//Logout Start
+app.get("/logout", auth, async (req, res) => {
+  try {
+      console.log(req.user);
+
+      //logout for single device
+      // req.user.tokens = req.user.tokens.filter((currElement) => {
+      //     return currentElement.token != req.token
+      // })
+
+      //Logout from all devices
+      req.user.tokens = [];
+
+      res.clearCookie("jwt");
+      console.log("logout successfully");
+
+      await req.user.save();
+      res.render("login.ejs")
+  } catch (error) {
+      res.send(500).send(error);
+  }
+})
+//Logout End
 
 app.listen(3000, () => {
   console.log("server running on port 3000");
