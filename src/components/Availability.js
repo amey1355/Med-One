@@ -1,10 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import BedCarousel from './BedCarousel';
+import { dummyData } from '../data/Data';
 
 const Availability = () => {
   return (
     <View>
-      <Text>Availability</Text>
+      {/* <Text>Beds Availability</Text> */}
+      <BedCarousel data = {dummyData}/>
     </View>
   )
 }
