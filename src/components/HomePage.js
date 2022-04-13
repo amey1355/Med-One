@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Button, ImageBackground, Image } from 'react-native'
+import { StyleSheet, Text, View, Button, ImageBackground, Image, ScrollView } from 'react-native'
 import React from 'react'
 import InfoSlider from './InfoSlider';
 import COLORS from '../consts/color';
@@ -8,7 +8,7 @@ const HomePage = ({ route, navigation }) => {
     // const { myName } = route.params;
 
     return (
-        <View style={[styles.mainContainer]}>
+        <ScrollView style={[styles.mainContainer]}>
 
             {/* <Text style={[styles.mainHeader]}> Welcome To 
             {myName.replace(/@[^@]+$/, '')} 
@@ -60,7 +60,7 @@ const HomePage = ({ route, navigation }) => {
             onPress={() => navigation.goBack()}
         /> */}
             </View>
-        </View>
+        </ScrollView>
 
     )
 }
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
         display: "flex",
         alignSelf: "center",
         justifyContent: "center",
-        maxWidth: "70"
+        // maxWidth: "70"
     },
     mainContent: {
         fontSize: 18,

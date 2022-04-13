@@ -47,7 +47,7 @@ import { useFonts } from '@expo-google-fonts/poppins';
 
 
 
-const CustomDrawer = (props) => {
+const CustomDrawer = (props, item) => {
 const {navigation} = props
     const [isLoaded, setIsLoaded] = useState(true);
     let [fontsLoad, error] = useFonts({
@@ -86,22 +86,22 @@ const {navigation} = props
         // })
         //For Windows
         fetch("http://localhost:3000/logout", {
-            method: "post",
+            method: "get",
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                email,
-                password,
-            })
+            // body: JSON.stringify({
+            //     email,
+            //     password,
+            // })
         })
             .then(() => {
                 // Alert.alert(`${data.name} is saved successfuly`)
                 // Alert.alert(JSON.stringify(`${data.name} is saved successfully`));
                 // Alert.alert(JSON.stringify(`saved successfully`));
-                // alert("Done With Logg")
+                // Alert.alert("Logout Successfull")
                 navigation.navigate('Home');
-                // console.log("Successfully Done sign in");
+                console.log("Successfully Done sign out");
             })
             .catch(err => {
                 Alert.alert("someting went wrong")
@@ -119,6 +119,7 @@ const {navigation} = props
                     style={{ padding: 20 }}>
                     <Image
                         source={require('../assets/user-profile.jpg')}
+                        // source={item.picture}
                         style={{
                             height: 80, width: 80, borderRadius: 40, marginBottom: 10,
                             // alignSelf: "center" 

@@ -24,16 +24,23 @@ const RegForm = ({ navigation, route }) => {
                     return route.params.password
                 case "picture":
                     return route.params.picture
+                case "address":
+                    return route.params.address
+                case "gender":
+                    return route.params.gender
             }
         }
         return ""
     }
 
     const [name, setName] = useState(getDetails("name"))
+    const [lname, setLname] = useState(getDetails("lname"))
     const [email, setEmail] = useState(getDetails("email"))
     const [phone, setPhone] = useState(getDetails("phone"))
     const [password, setPassword] = useState(getDetails("password"))
     const [picture, setPicture] = useState(getDetails("picture"))
+    const [address, setAddress] = useState(getDetails("address"))
+    const [gender, setGender] = useState(getDetails("gender"))
     const [modal, setModal] = useState(false)
 
     const submitData = () => {
@@ -43,12 +50,14 @@ const RegForm = ({ navigation, route }) => {
         //         'Content-Type': 'application/json'
         //     },
         //     body: JSON.stringify({
-        //         name,
-        //         email,
-        //         phone,
-        //         password,
-        //         picture,
-                
+        //      name,
+        //      email,
+        //      phone,
+        //      password,
+        //      picture,
+        //      address,
+        //      gender,
+
         //     })
         // })
         fetch("http://localhost:3000/send-data", {
@@ -62,13 +71,14 @@ const RegForm = ({ navigation, route }) => {
                 phone,
                 password,
                 picture,
-                
+                address,
+                gender,
             })
         })
-            .then(res => res.json())
-            .then(data => {
+            // .then(res => res.json())
+            .then(() => {
                 // Alert.alert(`${data.name} is saved successfuly`)
-                Alert.alert(JSON.stringify(`${data.name} is saved successfully`));
+                // Alert.alert(JSON.stringify(`${data.name} is saved successfully`));
                 navigation.navigate("Home")
             })
             .catch(err => {
@@ -79,7 +89,7 @@ const RegForm = ({ navigation, route }) => {
     }
 
     //Update and pic
-    const updateDetails = ()=>{
+    const updateDetails = () => {
         // fetch("http://10.0.2.2:3000/update",{
         //     method:"post",
         //     headers:{
@@ -92,96 +102,100 @@ const RegForm = ({ navigation, route }) => {
         //         phone,
         //         password,
         //         picture,
+        //         address,
+        //         gender,
         //     })
         // })
-        fetch("http://localhost:3000/update",{
-            method:"post",
-            headers:{
-              'Content-Type': 'application/json'
+        fetch("http://localhost:3000/update", {
+            method: "post",
+            headers: {
+                'Content-Type': 'application/json'
             },
-            body:JSON.stringify({
-                id:route.params._id,
+            body: JSON.stringify({
+                id: route.params._id,
                 name,
                 email,
                 phone,
                 password,
                 picture,
+                address,
+                gender,
             })
         })
-        .then(res=>res.json())
-        .then(data=>{
-            Alert.alert(`${data.name} is updated successfuly`)
-            navigation.navigate("Home")
-        })
-        .catch(err=>{
-          Alert.alert("someting went wrong while updating")
-      })
+            .then(res => res.json())
+            .then(data => {
+                Alert.alert(`${data.name} is updated successfuly`)
+                navigation.navigate("Home")
+            })
+            .catch(err => {
+                Alert.alert("someting went wrong while updating")
+            })
     }
 
-    const pickFromGallery = async ()=>{
-        const {granted} =  await Permissions.askAsync(Permissions.CAMERA_ROLL)
-        if(granted){
-             let data =  await ImagePicker.launchImageLibraryAsync({
-                  mediaTypes:ImagePicker.MediaTypeOptions.Images,
-                  allowsEditing:true,
-                  aspect:[1,1],
-                  quality:0.5
-              })
-              if(!data.cancelled){
-                  let newfile = { 
-                    uri:data.uri,
-                    type:`test/${data.uri.split(".")[1]}`,
-                    name:`test.${data.uri.split(".")[1]}` 
-                    
+    const pickFromGallery = async () => {
+        const { granted } = await Permissions.askAsync(Permissions.CAMERA_ROLL)
+        if (granted) {
+            let data = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                allowsEditing: true,
+                aspect: [1, 1],
+                quality: 0.5
+            })
+            if (!data.cancelled) {
+                let newfile = {
+                    uri: data.uri,
+                    type: `test/${data.uri.split(".")[1]}`,
+                    name: `test.${data.uri.split(".")[1]}`
+
                 }
-                  handleUpload(newfile)
-              }
-        }else{
-           Alert.alert("you need to give up permission to work")
-        }
-     }
-     const pickFromCamera = async ()=>{
-        const {granted} =  await Permissions.askAsync(Permissions.CAMERA)
-        if(granted){
-             let data =  await ImagePicker.launchCameraAsync({
-                  mediaTypes:ImagePicker.MediaTypeOptions.Images,
-                  allowsEditing:true,
-                  aspect:[1,1],
-                  quality:0.5
-              })
-            if(!data.cancelled){
-                let newfile = { 
-                  uri:data.uri,
-                  type:`test/${data.uri.split(".")[1]}`,
-                  name:`test.${data.uri.split(".")[1]}` 
-  
-              }
                 handleUpload(newfile)
             }
-        }else{
-           Alert.alert("you need to give up permission to work")
+        } else {
+            Alert.alert("you need to give up permission to work")
         }
-     }
-  
-  
-     const handleUpload = (image)=>{
-          const data = new FormData()
-          data.append('file',image)
-          data.append('upload_preset','medone')
-          data.append("cloud_name","ameysawant2")
-  
-          fetch("https://api.cloudinary.com/v1_1/ameysawant2/image/upload",{
-              method:"post",
-              body:data
-          }).then(res=>res.json()).
-          then(data=>{
-              setPicture(data.url)
-              setModal(false)
-          }).catch(err=>{
-              Alert.alert("error while uploading")
-              console.log(err);
-          })
-     }
+    }
+    const pickFromCamera = async () => {
+        const { granted } = await Permissions.askAsync(Permissions.CAMERA)
+        if (granted) {
+            let data = await ImagePicker.launchCameraAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                allowsEditing: true,
+                aspect: [1, 1],
+                quality: 0.5
+            })
+            if (!data.cancelled) {
+                let newfile = {
+                    uri: data.uri,
+                    type: `test/${data.uri.split(".")[1]}`,
+                    name: `test.${data.uri.split(".")[1]}`
+
+                }
+                handleUpload(newfile)
+            }
+        } else {
+            Alert.alert("you need to give up permission to work")
+        }
+    }
+
+
+    const handleUpload = (image) => {
+        const data = new FormData()
+        data.append('file', image)
+        data.append('upload_preset', 'medone')
+        data.append("cloud_name", "ameysawant2")
+
+        fetch("https://api.cloudinary.com/v1_1/ameysawant2/image/upload", {
+            method: "post",
+            body: data
+        }).then(res => res.json()).
+            then(data => {
+                setPicture(data.url)
+                setModal(false)
+            }).catch(err => {
+                Alert.alert("error while uploading")
+                console.log(err);
+            })
+    }
     //Update and pic
     return (
         <View style={styles.regForm}>
@@ -197,7 +211,7 @@ const RegForm = ({ navigation, route }) => {
             </View>
 
             <View style={styles.anotherOne}>
-                
+
                 <TextInput style={styles.textInput}
                     placeholder="Enter your name"
                     label='name'
@@ -205,7 +219,14 @@ const RegForm = ({ navigation, route }) => {
                     onChangeText={(name) => { setName(name) }}
                     underlineColorAndroid={'transparent'}
                 />
-                
+                <TextInput style={styles.textInput}
+                    placeholder="Enter your Last name"
+                    label='lname'
+                    // value={lname}
+                    onChangeText={(lname) => { setLname(lname) }}
+                    underlineColorAndroid={'transparent'}
+                />
+
                 <TextInput style={styles.textInput}
                     placeholder="Enter your email"
                     label='email'
@@ -214,7 +235,7 @@ const RegForm = ({ navigation, route }) => {
                     underlineColorAndroid={'transparent'}
                 />
                 {/* Added after starting to make db */}
-                
+
                 <TextInput style={styles.textInput}
                     placeholder="Enter your phone"
                     label='phone'
@@ -222,8 +243,23 @@ const RegForm = ({ navigation, route }) => {
                     onChangeText={(phone) => { setPhone(phone) }}
                     underlineColorAndroid={'transparent'}
                 />
+
+                <TextInput style={styles.textInput}
+                    placeholder="Enter your address"
+                    label='address'
+                    // value={address}
+                    onChangeText={(address) => { setAddress(address) }}
+                    underlineColorAndroid={'transparent'}
+                />
+                <TextInput style={styles.textInput}
+                    placeholder="Enter your gender"
+                    label='gender'
+                    // value={gender}
+                    onChangeText={(gender) => { setGender(gender) }}
+                    underlineColorAndroid={'transparent'}
+                />
                 {/* Added after starting to make db */}
-                
+
                 <TextInput style={styles.textInput}
                     placeholder="Enter password"
                     label='password'
@@ -296,13 +332,13 @@ const RegForm = ({ navigation, route }) => {
                 </Modal>
             </View>
             {/* New photo */}
-            <TouchableOpacity style={styles.btnStyling}>
+            {/* <TouchableOpacity style={styles.btnStyling}>
                 <View style={STYLES.btnPrimary}>
                     <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 18 }}
                         onPress={() => submitData()}
                     >Register</Text>
                 </View>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
         </View>
     )
 }
@@ -318,6 +354,7 @@ const styles = StyleSheet.create({
 
     regForm: {
         alignSelf: "stretch",
+        backgroundColor: "#FFFEFA"
     },
     header: {
         color: "#000",
@@ -385,6 +422,7 @@ const styles = StyleSheet.create({
 
     root: {
         flex: 1,
+        backgroundColor: "white"
     },
     inputStyle: {
         height: 100,

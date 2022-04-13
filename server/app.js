@@ -66,11 +66,14 @@ app.post("/send-data", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
   const users = new Users({
-    name: req.body.name,
+    name: req.body.name,    
+    lname: req.body.lname,
     email: req.body.email,
     phone: req.body.phone,
     password: req.body.password,
     picture: req.body.picture,
+    address: req.body.address,
+    gender: req.body.gender,
   });
   users
     .save()
@@ -99,10 +102,13 @@ app.post("/delete", (req, res) => {
 app.post("/update", (req, res) => {
   Users.findByIdAndUpdate(req.body.id, {
     name: req.body.name,
+    lname: req.body.lname,
     email: req.body.email,
     phone: req.body.phone,
     password: req.body.password,
     picture: req.body.picture,
+    address: req.body.address,
+    gender: req.body.gender,
   }).then((data) => {
     console.log(data);
     res.send("updated");
@@ -138,7 +144,7 @@ app.post("/login", async (req, res) => {
       console.log("the token part: " + token);
 
       res.cookie("jwt", token, {
-          expires: new Date(Date.now() + 600000), //expires in 10 minutes
+          expires: new Date(Date.now() + 300000), //expires in 10 minutes
           httpOnly: true
 
       });
@@ -146,6 +152,7 @@ app.post("/login", async (req, res) => {
       if (isMatch) {
           res.status(201).render("login.ejs");
           console.log("Done");
+          // console.log(jwt);
       }
       else {
           res.send("Credentials not matching");
@@ -175,9 +182,10 @@ app.get("/logout", auth, async (req, res) => {
       console.log("logout successfully");
 
       await req.user.save();
-      res.render("login.ejs")
+      // res.render("login.ejs")
   } catch (error) {
       res.send(500).send(error);
+      console.log(error);
   }
 })
 //Logout End
