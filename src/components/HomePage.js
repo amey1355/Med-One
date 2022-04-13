@@ -46,10 +46,11 @@ const HomePage = ({ route, navigation }) => {
                         }}
                     />
                     <Image
-                        source={require('../assets/images/bed_background.png')}
+                        source={require('../assets/images/meds_background.png')}
                         style={{
                             // height: 200, width: 200, borderRadius: 40, marginBottom: 10, marginTop: -210, marginLeft: 200,
-                            height: 200, width: 200, borderRadius: 40, marginBottom: 10,
+                            height: 160, width: 200, borderRadius: 40, marginBottom: 10, marginTop: 10, 
+                            // marginRight: 20,
                             // alignSelf: "center" 
                         }}
                     />

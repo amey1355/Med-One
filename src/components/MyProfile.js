@@ -66,7 +66,7 @@ const MyProfile = ({ navigation, route, props }) => {
         <View style={styles.secrootStyle}>
           <Image
             // source={require('../assets/user-profile.jpg')}
-            source={{ uri: item.picture }}
+            source={item.picture}
             style={{
               height: 100, width: 100,
               borderRadius: 10,
@@ -129,6 +129,9 @@ const MyProfile = ({ navigation, route, props }) => {
           >
             {/* <AntDesign style={{marginLeft: 50,}} name="user" size={22} /> */}
             {item.address}
+            {/* Remove for dynamic data */}
+            Mumbai, India 
+            {/* Remove for dynamic data */}
           </Text>
           <Text style={{ marginLeft: 16, fontSize: 15, marginTop: 10, }}>Gender</Text>
           <Text style={[styles.emailtextStyle, styles.mgtextStyle]}
