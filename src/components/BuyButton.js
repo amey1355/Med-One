@@ -3,7 +3,7 @@ import { TouchableOpacity, Text, Image } from "react-native";
 
 import { COLORS, SIZES, FONTS, SHADOWS } from "../constants";
 
-export const CircleButton = ({ imgUrl, handlePress, ...props }) => {
+export const BuyCircleButton = ({ imgUrl, handlePress, ...props }) => {
   return (
     <TouchableOpacity
       style={{
@@ -28,7 +28,7 @@ export const CircleButton = ({ imgUrl, handlePress, ...props }) => {
   );
 };
 
-export const RectButton = ({ minWidth, fontSize, handlePress, ...props }) => {
+export const BuyRectButton = ({ minWidth, fontSize, handlePress, ...props }) => {
   return (
     <TouchableOpacity
       style={{
@@ -49,7 +49,7 @@ export const RectButton = ({ minWidth, fontSize, handlePress, ...props }) => {
         }}
       >
         {/* Place a bid */}
-        Checkout
+        Buy Now
       </Text>
     </TouchableOpacity>
   );

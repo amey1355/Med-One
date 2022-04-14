@@ -52,6 +52,11 @@ const theme = {
 // Medicines Page theme End
 
 function App() {
+  // To not display warning messages on android application
+  // LogBox.ignoreAllLogs(value)
+  console.disableYellowBox = true;
+  // To not display warning messages on android application
+
   const Stack = createNativeStackNavigator();
   return (
 
