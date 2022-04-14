@@ -9,7 +9,10 @@ const DetailsHeader = ({ data, navigation }) => (
     <Image
       source={data.image}
       resizeMode="cover"
-      style={{ width: "100%", height: "100%", maxHeight: "50vh", maxWidth: "50vh", display: "flex", justifyContent: "center", alignSelf: "center" }}
+      style={{ width: "100%", height: "100%", 
+      maxWidth: Platform.OS === 'web' ? "50vh" : 250,
+            maxHeight: Platform.OS === 'web' ? "50vh" : 250, 
+      display: "flex", justifyContent: "center", alignSelf: "center" }}
     />
 
     <CircleButton
@@ -72,7 +75,7 @@ const Details = ({ route, navigation }) => {
                 <Text
                   style={{
                     fontSize: SIZES.font,
-                    fontFamily: FONTS.semiBold,
+                    // fontFamily: FONTS.semiBold,
                     color: COLORS.primary,
                   }}
                 >

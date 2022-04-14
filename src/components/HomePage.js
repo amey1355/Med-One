@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Button, ImageBackground, Image, ScrollView } from 'react-native'
 import React from 'react'
-import InfoSlider from './InfoSlider';
+// import InfoSlider from './InfoSlider';
 import COLORS from '../consts/color';
 import STYLES from '../styles';
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
-import { View, Image } from "react-native";
+import { View, Image, Platform } from "react-native";
 
 import { COLORS, SIZES, SHADOWS, assets } from "../constants";
 import { SubInfo, EthPrice, NFTTitle } from "./SubInfo";
@@ -32,8 +32,8 @@ const NFTCard = ({ data }) => {
             width: "100%",
             height: "100%",
             // After editing
-            maxWidth: "50vh",
-            maxHeight: "50vh",
+            maxWidth: Platform.OS === 'web' ? "50vh" : 250,
+            maxHeight: Platform.OS === 'web' ? "50vh" : 250,
             display: "flex",
             alignSelf: "center",
             justifyContent: "center",

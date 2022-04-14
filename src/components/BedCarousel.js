@@ -54,7 +54,7 @@ const BedCarousel = ({ data }) => {
                         return <BedCarouselItem item={item} />
                     }}
                     onScroll={Animated.event(
-                        [{ nativeEvent: { contentOffset: { x: scrollX } } }]
+                        [{ nativeEvent: { contentOffset: { x: scrollX } } }, ]
                     )}
                 />
 

@@ -18,11 +18,11 @@ const HomeHeader = ({ onSearch }) => {
           alignItems: "center",
         }}
       >
-        <Image
+        {/* <Image
           source={assets.logo}
           resizeMode="contain"
           style={{ width: "50vh", height: "20vh",  }}
-        />
+        /> */}
 
         <View style={{ width: 45, height: 45 }}>
           {/* <Image
@@ -47,7 +47,7 @@ const HomeHeader = ({ onSearch }) => {
       <View style={{ marginVertical: SIZES.font }}>
         <Text
           style={{
-            fontFamily: FONTS.regular,
+            // fontFamily: FONTS.regular,
             fontSize: SIZES.small,
             color: COLORS.white,
           }}
@@ -57,7 +57,7 @@ const HomeHeader = ({ onSearch }) => {
 
         <Text
           style={{
-            fontFamily: FONTS.bold,
+            // fontFamily: FONTS.bold,
             fontSize: SIZES.large,
             color: COLORS.white,
             marginTop: SIZES.base / 2,
