@@ -11,6 +11,7 @@ import {
   View,
   Image,
   Animated,
+  Platform
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -163,7 +164,7 @@ const BedsAvailability = ({navigation}) => {
             </Text>
           </View>
         </View>
-        <Icon name="person-outline" size={38} color={bedscolor.grey} />
+        {/* <Icon name="person-outline" size={38} color={bedscolor.grey} /> */}
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={style.searchInputContainer}>
@@ -191,6 +192,7 @@ const BedsAvailability = ({navigation}) => {
               paddingVertical: 30,
               paddingLeft: 20,
               paddingRight: cardWidth / 2 - 40,
+            //   marginLeft: Platform.OS === 'web' ? "20%" : 0,
             }}
             showsHorizontalScrollIndicator={false}
             renderItem={({item, index}) => <Card hotel={item} index={index} />}
@@ -251,14 +253,6 @@ const style = StyleSheet.create({
     fontSize: 17,
     fontWeight: 'bold',
   },
-//   card: {
-//     height: 280,
-//     width: cardWidth,
-//     elevation: 15,
-//     marginRight: 20,
-//     borderRadius: 15,
-//     backgroundColor: bedscolor.white,
-//   },
   card: {
     height: 280,
     width: cardWidth,
