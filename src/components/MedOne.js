@@ -23,6 +23,7 @@ import MedsHome from'../screens/Home';
 import Camps from './Camps';
 import Wallet from './Wallet';
 import { Provider } from 'react-redux';
+import BedsAvailability from './BedsAvailability';
 
 const MedOne = () => {
   const Drawer = createDrawerNavigator();
@@ -45,6 +46,17 @@ const MedOne = () => {
           ),
         }}
         />
+
+
+        <Drawer.Screen name="New Beds" component={BedsAvailability} 
+        options={{
+          drawerIcon: ({color}) => (
+            <Fontisto name="bed-patient" size={22} color={color} />
+          ),
+        }}
+        />
+
+
         <Drawer.Screen name="Sign In" component={SignIn} 
         options={{
           drawerIcon: ({color}) => (
@@ -66,6 +78,7 @@ const MedOne = () => {
           ),
         }}
         />
+        
         <Drawer.Screen name="Availability" component={Availability} 
         options={{
           drawerIcon: ({color}) => (

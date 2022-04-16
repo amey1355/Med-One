@@ -39,6 +39,8 @@ import { useFonts } from "expo-font";
 import Home from "./src/screens/Home";
 import Details from "./src/screens/Details";
 import MyProfile from './src/components/MyProfile';
+import BedsAvailabilityDetails from './src/components/BedsAvailabilityDetails';
+import BedsAvailability from './src/components/BedsAvailability';
 // Medicines Page Import End
 // Medicines Page theme Start
 const theme = {
@@ -72,6 +74,8 @@ function App() {
         {/* Meds Page */}
         <Stack.Screen name="MedsHome" component={Home} />
         <Stack.Screen name="Details" component={Details} />
+        <Stack.Screen name="BedsAvailability" component={BedsAvailability} />
+        <Stack.Screen name="BedsAvailabilityDetails" component={BedsAvailabilityDetails} />
         {/* Meds Page */}
 
         {/* <Stack.Screen name="Side" component={Side} /> */}
