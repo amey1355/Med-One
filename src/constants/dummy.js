@@ -3,6 +3,7 @@ import assets from "./assets";
 const NFTData = [
   {
     id: "NFT-01",
+    category: "Vitamins or Proteins",
     name: "Revital H Health Supplement Capsules Bottle Of 60",
     creator: "REVITAL STORE",
     price: 467.50,
@@ -35,6 +36,7 @@ const NFTData = [
   },
   {
     id: "NFT-02",
+    category: "pain",
     name: "Vicks Vaporub Xtra Strong",
     creator: "VICKS Store",
     price: 93.06,
@@ -53,6 +55,7 @@ const NFTData = [
   },
   {
     id: "NFT-03",
+    category: "hair-solutions",
     name: "Indulekha Bringha Hair Oil Bottle Of 50 Ml",
     creator: "Elisabeth aho",
     price: 234,
@@ -78,6 +81,7 @@ const NFTData = [
   },
   {
     id: "NFT-04",
+    category: "first-aid",
     name: "Dettol Antiseptic Liquid Bottle Of 550 Ml",
     creator: "DETTOL Store",
     price: 194.6,
@@ -117,6 +121,7 @@ const NFTData = [
   },
   {
     id: "NFT-05",
+    category: "first-aid",
     name: "BD Glide with TBL ULTRA-FINE INSULIN SYR U40 31G 6MM 10BG",
     creator: "BD ULTRA FINE Store",
     price: 94,
@@ -135,6 +140,7 @@ const NFTData = [
   },
   {
     id: "NFT-06",
+    category: "Vitamins or Proteins",
     name: "Ensure High Protein Nutrition For Active Adults (Chocolate Flavour), 400g",
     creator: "ENSURE Store",
     price: 609,
@@ -181,6 +187,7 @@ const NFTData = [
   },
   {
     id: "NFT-07",
+    category: "hair-solutions",
     name: "Scalpe Plus Anti Dandruff Shampoo Bottle Of 75 Ml",
     creator: "SCALPE Store",
     price: 210.6,

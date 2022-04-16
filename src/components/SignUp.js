@@ -56,7 +56,7 @@ const SignUp = ({ navigation }) => {
             })
             .catch(err => {
                 //   Alert.alert("someting went wrong", err)
-                Alert.alert(JSON.stringify("Something went wrong while sign up", err));
+                // Alert.alert(JSON.stringify("Something went wrong while sign up", err));
                 console.log(err);
             })
     }

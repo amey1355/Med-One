@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, SafeAreaView, Image, StatusBar, FlatList, Platform } from "react-native";
+import { View, Text, SafeAreaView, Image, StatusBar, FlatList, Platform, TouchableOpacity } from "react-native";
 
 import { COLORS, SIZES, assets, SHADOWS, FONTS } from "../constants";
 import { CircleButton, RectButton, SubInfo, DetailsDesc, DetailsBid, FocusedStatusBar } from "../components/";
@@ -32,7 +32,58 @@ const DetailsHeader = ({ data, navigation }) => (
 );
 
 const Details = ({ route, navigation }) => {
+  
   const { data } = route.params;
+//     const sendMedsData = () => {
+    
+//     // const name = data.name
+//     // const price = data.price
+//     // const category = data.category
+//     // fetch("http://10.0.2.2:3000/update-meds",{
+//     //     method:"post",
+//     //     headers:{
+//     //       'Content-Type': 'application/json'
+//     //     },
+//     //     body:JSON.stringify({
+//     //         id:route.params._id,
+//     //         purchasedmeds,
+//     //     })
+//     // })
+//     fetch("http://localhost:3000/update-meds", {
+//         method: "post",
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({
+//             id: route.params._id,
+//             purchasedmeds: data,
+//           //   purchasedmeds : [{
+//           //     "name": {
+//           //       name
+//           //   },
+//           //     "price": {
+//           //       price
+//           //   },
+//           //   "category": {
+//           //     category
+//           //   }
+          
+//           // }],
+//             // name,
+//             // price,
+//             // category,
+//         })
+//     })
+//         .then(res => res.json())
+//         .then(data => {
+//             // Alert.alert(`${data.name} is updated successfuly`)
+//             // navigation.navigate("Home")
+//             console.log("Updated Meds")
+//         })
+//         .catch(err => {
+//             Alert.alert("someting went wrong while updating meds")
+//         })
+// }
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -54,7 +105,12 @@ const Details = ({ route, navigation }) => {
           zIndex: 1,
         }}
       >
-        <BuyRectButton minWidth={170} fontSize={SIZES.large} {...SHADOWS.dark} />
+        <TouchableOpacity>
+
+        <BuyRectButton minWidth={170} fontSize={SIZES.large} {...SHADOWS.dark} 
+        // onPress={alert("Bought")}
+        />
+        </TouchableOpacity>
       </View>
 
       <FlatList

@@ -12,7 +12,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 
 const MyProfile = ({ navigation, route, props }) => {
-  // const {_id,name,picture,phone, gender,email, address} = props.route.params.item
+  // const {_id,name, lname, picture,phone, gender,email, address} = props.route.params.item
 
   const dispatch = useDispatch()
   const { data, loading } = useSelector((state) => {
@@ -97,7 +97,7 @@ const MyProfile = ({ navigation, route, props }) => {
             underlineColorAndroid={'transparent'}
           >
             {/* <AntDesign style={{marginLeft: 50,}} name="user" size={22} /> */}
-            {item.name}
+            {item.lname}
           </Text>
           <Text style={styles.emailtextStyle}
             // placeholder="Enter your email"

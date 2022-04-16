@@ -67,6 +67,7 @@ const RegForm = ({ navigation, route }) => {
             },
             body: JSON.stringify({
                 name,
+                lname,
                 email,
                 phone,
                 password,
@@ -114,6 +115,7 @@ const RegForm = ({ navigation, route }) => {
             body: JSON.stringify({
                 id: route.params._id,
                 name,
+                lname,
                 email,
                 phone,
                 password,
@@ -410,7 +412,7 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         justifyContent: "center",
         backgroundColor: "white",
-        width: 300,
+        width: Platform.OS === 'android' ? 300 : 500,
         borderWidth: 1,
         borderStyle: 'solid',
         borderColor: "lightgray",

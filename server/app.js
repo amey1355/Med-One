@@ -51,6 +51,33 @@ app.get("/", (req, res) => {
   res.send("Welcome to MedOne");
 });
 
+
+app.post("/send-data", (req, res) => {
+  // console.log(req.body);
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
+  const users = new Users({
+    // _id: req.body.email,
+    name: req.body.name,    
+    lname: req.body.lname,
+    email: req.body.email,
+    phone: req.body.phone,
+    password: req.body.password,
+    picture: req.body.picture,
+    address: req.body.address,
+    gender: req.body.gender,
+    purchasedmeds: req.body.purchasedmeds,
+  });
+  users
+  .save()
+  .then((data) => {
+    console.log(data);
+    // res.send("success");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+});
 app.get("/get-data", (req, res) => {
   Users.find({})
     .then((data) => {
@@ -60,35 +87,10 @@ app.get("/get-data", (req, res) => {
       console.log(err);
     });
 });
-
-app.post("/send-data", (req, res) => {
-  // console.log(req.body);
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
-  const users = new Users({
-    name: req.body.name,    
-    lname: req.body.lname,
-    email: req.body.email,
-    phone: req.body.phone,
-    password: req.body.password,
-    picture: req.body.picture,
-    address: req.body.address,
-    gender: req.body.gender,
-  });
-  users
-    .save()
-    .then((data) => {
-      console.log(data);
-      // res.send("success");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
 // app.use(function (req, res, next) {
-//     res.header("Access-Control-Allow-Origin", "*");
-//     res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE");
-//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  //     res.header("Access-Control-Allow-Origin", "*");
+  //     res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE");
+  //     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
 //     next();
 // });
 
@@ -109,15 +111,24 @@ app.post("/update", (req, res) => {
     picture: req.body.picture,
     address: req.body.address,
     gender: req.body.gender,
+    purchasedmeds: req.body.purchasedmeds,
   }).then((data) => {
     console.log(data);
     res.send("updated");
   });
 });
+app.post("/update-meds", (req, res) => {
+  Users.findByIdAndUpdate(req.body.id, {
+    purchasedmeds: req.body.purchasedmeds,
+  }).then((data) => {
+    console.log(data);
+    res.send("updated meds");
+  });
+});
 
 // AuthRoutes Section
 app.post("/signup", (req, res) => {
-  // res.send("Welcome to MedOne from Router");
+  // res.send("Welcome to MedOne");
   console.log(req.body);
   const { email, password } = req.body;
   const suser = new signUpusers({ email, password });

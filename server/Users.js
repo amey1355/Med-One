@@ -9,6 +9,21 @@ const UsersSchema = ({
     picture: String,
     address: String,
     gender: String,
+    purchasedmeds: [{
+        name: {
+            type: String,
+            // required: true
+        },
+        price: {
+            type: String,
+        },
+        category: {
+            type: String,
+        },
+        quantity: {
+            type: Number,
+        }
+    }],
 })
 
 mongoose.model("users", UsersSchema);
