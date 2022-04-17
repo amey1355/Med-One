@@ -14,7 +14,7 @@ const bedsmanual = [
       location: 'Yuki street',
       price: 70,
       image: require('../assets/beds_img/hotel2.jpg'),
-      available: 34,
+      available: 20,
       details: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Consequat nisl vel pretium lectus quam id leo. Velit euismod in pellentesque massa placerat duis ultricies lacus sed. Justo laoreet sit amet cursus sit`,
     },
     {
@@ -23,7 +23,7 @@ const bedsmanual = [
       location: 'Almond street',
       price: 90,
       image: require('../assets/beds_img/hotel3.jpg'),
-      available: 34,
+      available: 14,
       details: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Consequat nisl vel pretium lectus quam id leo. Velit euismod in pellentesque massa placerat duis ultricies lacus sed. Justo laoreet sit amet cursus sit`,
     },
     {
@@ -32,7 +32,7 @@ const bedsmanual = [
       location: 'Main street',
       price: 100,
       image: require('../assets/beds_img/hotel4.jpg'),
-      available: 34,
+      available: 40,
       details: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Consequat nisl vel pretium lectus quam id leo. Velit euismod in pellentesque massa placerat duis ultricies lacus sed. Justo laoreet sit amet cursus sit`,
     },
   ];

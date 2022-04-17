@@ -1,4 +1,6 @@
-import React from 'react';
+// import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   Dimensions,
   FlatList,
@@ -11,22 +13,67 @@ import {
   View,
   Image,
   Animated,
-  Platform
+  Platform,
+  Alert
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import bedscolor from '../consts/bedscolor';
 import bedsmanual from '../consts/bedsmanual';
-const {width} = Dimensions.get('screen');
+const { width } = Dimensions.get('screen');
 const cardWidth = width / 1.8;
 
-const BedsAvailability = ({navigation}) => {
+const BedsAvailability = ({ navigation }) => {
+  // // Beds Data from Database Starting
+  const dispatch = useDispatch()
+  const { data, loading } = useSelector((state) => {
+    return state
+  })
+
+  console.log(data, loading)
+
+  const fetchBedsData = () => {
+    //For Android
+    fetch("http://10.0.2.2:3000/get-beds-data")
+      .then(res => res.json())
+      .then(results => {
+
+        // setData(results)
+        // setLoading(false)
+        dispatch({ type: "ADD_DATA", payload: results })
+        dispatch({ type: "SET_LOADING", payload: false })
+
+      }).catch(err => {
+        // Alert.alert("someting went wrong")
+        console.log(err);
+      })
+    //For Web
+    // fetch("http://localhost:3000/get-beds-data")
+    //   .then(res => res.json())
+    //   .then(results => {
+
+    //     // setData(results)
+    //     // setLoading(false)
+    //     dispatch({ type: "ADD_DATA", payload: results })
+    //     dispatch({ type: "SET_LOADING", payload: false })
+
+    //   }).catch(err => {
+    //     Alert.alert("someting went wrong")
+    //     console.log(err);
+    //   })
+  }
+
+  useEffect(() => {
+    fetchBedsData()
+  }, [])
+  // Beds Data from Database End 
+
   const categories = ['All', 'Popular', 'Top Rated', 'Featured', 'Luxury'];
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
   const [activeCardIndex, setActiveCardIndex] = React.useState(0);
   const scrollX = React.useRef(new Animated.Value(0)).current;
 
-  const CategoryList = ({navigation}) => {
+  const CategoryList = ({ navigation }) => {
     return (
       <View style={style.categoryListContainer}>
         {categories.map((item, index) => (
@@ -61,7 +108,8 @@ const BedsAvailability = ({navigation}) => {
       </View>
     );
   };
-  const Card = ({hotel, index}) => {
+  const Card = ({ hotel, index }, item) => {
+    // const {item} = props;
     const inputRange = [
       (index - 1) * cardWidth,
       index * cardWidth,
@@ -75,29 +123,32 @@ const BedsAvailability = ({navigation}) => {
       inputRange,
       outputRange: [0.8, 1, 0.8],
     });
+
+    // const renderBedsList = ((item) =>{
+
     return (
       <TouchableOpacity
         disabled={activeCardIndex != index}
         activeOpacity={1}
         onPress={() => navigation.navigate('BedsAvailabilityDetails', hotel)}>
-        <Animated.View style={{...style.card, transform: [{scale}]}}>
-          <Animated.View style={{...style.cardOverLay, opacity}} />
+        <Animated.View style={{ ...style.card, transform: [{ scale }] }}>
+          <Animated.View style={{ ...style.cardOverLay, opacity }} />
           <View style={style.priceTag}>
             <Text
-              style={{color: bedscolor.white, fontSize: 20, fontWeight: 'bold'}}>
+              style={{ color: bedscolor.white, fontSize: 20, fontWeight: 'bold' }}>
               ${hotel.price}
             </Text>
           </View>
           <Image source={hotel.image} style={style.cardImage} />
           <View style={style.cardDetails}>
             <View
-              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+              style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <View>
-                <Text style={{fontWeight: 'bold', fontSize: 17}}>
-                  {hotel.name}
+                <Text style={{ fontWeight: 'bold', fontSize: 17 }}>
+                  {item.name}
                 </Text>
-                <Text style={{color: bedscolor.grey, fontSize: 12}}>
-                  {hotel.location}
+                <Text style={{ color: bedscolor.grey, fontSize: 12 }}>
+                  {item.location}
                 </Text>
               </View>
               <Icon name="bookmark-border" size={26} color={bedscolor.primary} />
@@ -108,7 +159,7 @@ const BedsAvailability = ({navigation}) => {
                 justifyContent: 'space-between',
                 marginTop: 10,
               }}>
-              <View style={{flexDirection: 'row'}}>
+              <View style={{ flexDirection: 'row' }}>
                 <Icon name="star" size={15} color={bedscolor.orange} />
                 <Icon name="star" size={15} color={bedscolor.orange} />
                 <Icon name="star" size={15} color={bedscolor.orange} />
@@ -116,14 +167,16 @@ const BedsAvailability = ({navigation}) => {
                 <Icon name="star" size={15} color={bedscolor.grey} />
               </View>
               {/* <Text style={{fontSize: 10, color: bedscolor.grey}}>365reviews</Text> */}
-              <Text style={{fontSize: 10, color: bedscolor.grey}}>Available Beds: {hotel.available}</Text>
+              <Text style={{ fontSize: 10, color: bedscolor.grey }}>Available Beds: {hotel.available}</Text>
             </View>
           </View>
         </Animated.View>
       </TouchableOpacity>
+
     );
   };
-  const TopHotelCard = ({hotel}) => {
+
+  const TopHotelCard = ({ hotel }) => {
     return (
       <View style={style.topHotelCard}>
         <View
@@ -135,14 +188,14 @@ const BedsAvailability = ({navigation}) => {
             flexDirection: 'row',
           }}>
           <Icon name="star" size={15} color={bedscolor.orange} />
-          <Text style={{color: bedscolor.white, fontWeight: 'bold', fontSize: 15}}>
+          <Text style={{ color: bedscolor.white, fontWeight: 'bold', fontSize: 15 }}>
             5.0
           </Text>
         </View>
         <Image style={style.topHotelCardImage} source={hotel.image} />
-        <View style={{paddingVertical: 5, paddingHorizontal: 10}}>
-          <Text style={{fontSize: 10, fontWeight: 'bold'}}>{hotel.name}</Text>
-          <Text style={{fontSize: 7, fontWeight: 'bold', color: bedscolor.grey}}>
+        <View style={{ paddingVertical: 5, paddingHorizontal: 10 }}>
+          <Text style={{ fontSize: 10, fontWeight: 'bold' }}>{hotel.name}</Text>
+          <Text style={{ fontSize: 7, fontWeight: 'bold', color: bedscolor.grey }}>
             {hotel.location}
           </Text>
         </View>
@@ -151,16 +204,16 @@ const BedsAvailability = ({navigation}) => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: bedscolor.white}}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: bedscolor.white }}>
       <View style={style.header}>
-        <View style={{paddingBottom: 15}}>
-          <Text style={{fontSize: 30, fontWeight: 'bold'}}>
+        <View style={{ paddingBottom: 15 }}>
+          <Text style={{ fontSize: 30, fontWeight: 'bold' }}>
             Find your Bed
           </Text>
-          <View style={{flexDirection: 'row'}}>
-            <Text style={{fontSize: 30, fontWeight: 'bold'}}>in </Text>
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={{ fontSize: 30, fontWeight: 'bold' }}>in </Text>
             <Text
-              style={{fontSize: 30, fontWeight: 'bold', color: bedscolor.primary}}>
+              style={{ fontSize: 30, fontWeight: 'bold', color: bedscolor.primary }}>
               Mumbai
             </Text>
           </View>
@@ -169,23 +222,23 @@ const BedsAvailability = ({navigation}) => {
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={style.searchInputContainer}>
-          <Icon name="search" size={30} style={{marginLeft: 20}} />
+          <Icon name="search" size={30} style={{ marginLeft: 20 }} />
           <TextInput
             placeholder="Search"
-            style={{fontSize: 20, paddingLeft: 10}}
+            style={{ fontSize: 20, paddingLeft: 10 }}
           />
         </View>
         <CategoryList />
-        <View style={{display: Platform.OS === 'web' ? 'none' : 'flex'}}>
-            <Animated.FlatList
+        <View style={{ display: Platform.OS === 'web' ? 'none' : 'flex' }}>
+          <Animated.FlatList
             onMomentumScrollEnd={(e) => {
               setActiveCardIndex(
                 Math.round(e.nativeEvent.contentOffset.x / cardWidth),
               );
             }}
             onScroll={Animated.event(
-              [{nativeEvent: {contentOffset: {x: scrollX}}}],
-              {useNativeDriver: true},
+              [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+              { useNativeDriver: true },
             )}
             horizontal
             data={bedsmanual}
@@ -193,10 +246,10 @@ const BedsAvailability = ({navigation}) => {
               paddingVertical: 30,
               paddingLeft: 20,
               paddingRight: cardWidth / 2 - 40,
-            //   marginLeft: Platform.OS === 'web' ? "20%" : 0,
+              //   marginLeft: Platform.OS === 'web' ? "20%" : 0,
             }}
             showsHorizontalScrollIndicator={false}
-            renderItem={({item, index}) => <Card hotel={item} index={index} />}
+            renderItem={({ item, index }) => <Card hotel={item} index={index} />}
             snapToInterval={cardWidth}
           />
         </View>
@@ -206,10 +259,10 @@ const BedsAvailability = ({navigation}) => {
             justifyContent: 'space-between',
             marginHorizontal: 20,
           }}>
-          <Text style={{fontWeight: 'bold', color: bedscolor.grey}}>
+          <Text style={{ fontWeight: 'bold', color: bedscolor.grey }}>
             Top Beds
           </Text>
-          <Text style={{color: bedscolor.grey}}>Show all</Text>
+          <Text style={{ color: bedscolor.grey }}>Show all</Text>
         </View>
         <FlatList
           data={bedsmanual}
@@ -220,10 +273,27 @@ const BedsAvailability = ({navigation}) => {
             marginTop: 20,
             paddingBottom: 30,
           }}
-          renderItem={({item}) => <TopHotelCard hotel={item} />}
+          renderItem={({ item }) => <TopHotelCard hotel={item} />}
         />
-      </ScrollView>
+
+
+        {/* Beds Data from db displaying  */}
+          </ScrollView>
+        <View>
+          <FlatList
+            data={data}
+            renderItem={({ item }) => {
+              return Card(item)
+            }}
+            keyExtractor={item => item.name}
+            onRefresh={() => fetchBedsData()}
+            refreshing={loading}
+          />
+        </View>
+        {/* Beds Data from db displaying  */}
+
     </SafeAreaView>
+
   );
 };
 

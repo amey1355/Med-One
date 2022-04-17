@@ -46,17 +46,6 @@ const MedOne = () => {
           ),
         }}
         />
-
-
-        <Drawer.Screen name="New Beds" component={BedsAvailability} 
-        options={{
-          drawerIcon: ({color}) => (
-            <Fontisto name="bed-patient" size={22} color={color} />
-          ),
-        }}
-        />
-
-
         <Drawer.Screen name="Sign In" component={SignIn} 
         options={{
           drawerIcon: ({color}) => (
@@ -86,13 +75,20 @@ const MedOne = () => {
           ),
         }}
         />
-        <Drawer.Screen name="Booking" component={Booking} 
+        <Drawer.Screen name="Beds" component={BedsAvailability} 
         options={{
           drawerIcon: ({color}) => (
             <Fontisto name="bed-patient" size={22} color={color} />
           ),
         }}
         />
+        {/* <Drawer.Screen name="Booking" component={Booking} 
+        options={{
+          drawerIcon: ({color}) => (
+            <Fontisto name="bed-patient" size={22} color={color} />
+          ),
+        }}
+        /> */}
         <Drawer.Screen name="Medicines" component={MedsHome}
         options={{
           drawerIcon: ({color}) => (
