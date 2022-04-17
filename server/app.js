@@ -8,6 +8,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("./Users");
 require("./signUpUsers.js");
+require("./bedsavail.js")
 const cors = require("cors");
 const { json } = require("express");
 
@@ -26,6 +27,7 @@ app.use(
 );
 
 const Users = mongoose.model("users");
+const Bedsavail = mongoose.model("bedsavail");
 const authRoutes = require('./routes/authRoutes');
 // const signUpusers = require('./signUpUsers');
 const signUpusers = mongoose.model('signUpusers');
@@ -80,50 +82,84 @@ app.post("/send-data", (req, res) => {
 });
 app.get("/get-data", (req, res) => {
   Users.find({})
+  .then((data) => {
+    res.send(data);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+});
+// app.use(function (req, res, next) {
+  //     res.header("Access-Control-Allow-Origin", "*");
+  //     res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE");
+  //     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  //     next();
+  // });
+  
+  app.post("/delete", (req, res) => {
+    Users.findByIdAndRemove(req.body.id).then((data) => {
+      console.log(data);
+      res.send("deleted");
+    });
+  });
+  
+  app.post("/update", (req, res) => {
+    Users.findByIdAndUpdate(req.body.id, {
+      name: req.body.name,
+      lname: req.body.lname,
+      email: req.body.email,
+      phone: req.body.phone,
+      password: req.body.password,
+      picture: req.body.picture,
+      address: req.body.address,
+      gender: req.body.gender,
+      purchasedmeds: req.body.purchasedmeds,
+    }).then((data) => {
+      console.log(data);
+      res.send("updated");
+    });
+  });
+  app.post("/update-meds", (req, res) => {
+    Users.findByIdAndUpdate(req.body.id, {
+      purchasedmeds: req.body.purchasedmeds,
+    }).then((data) => {
+    console.log(data);
+    res.send("updated meds");
+  });
+});
+
+app.post("/send-beds-data", (req, res) => {
+  // console.log(req.body);
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
+  const bedsavail = new Bedsavail({
+    id: req.body.id,
+    name: req.body.name,
+    location: req.body.location,
+    price: req.body.price,
+    image: req.body.image,
+    available: req.body.available,
+    details: req.body.details,
+  });
+  bedsavail
+  .save()
+  .then((data) => {
+    console.log(data);
+    res.send("successfully inserted data into beds db");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+});
+
+app.get("/get-beds-data", (req, res) => {
+  Bedsavail.find({})
     .then((data) => {
       res.send(data);
     })
     .catch((err) => {
       console.log(err);
     });
-});
-// app.use(function (req, res, next) {
-  //     res.header("Access-Control-Allow-Origin", "*");
-  //     res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE");
-  //     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-//     next();
-// });
-
-app.post("/delete", (req, res) => {
-  Users.findByIdAndRemove(req.body.id).then((data) => {
-    console.log(data);
-    res.send("deleted");
-  });
-});
-
-app.post("/update", (req, res) => {
-  Users.findByIdAndUpdate(req.body.id, {
-    name: req.body.name,
-    lname: req.body.lname,
-    email: req.body.email,
-    phone: req.body.phone,
-    password: req.body.password,
-    picture: req.body.picture,
-    address: req.body.address,
-    gender: req.body.gender,
-    purchasedmeds: req.body.purchasedmeds,
-  }).then((data) => {
-    console.log(data);
-    res.send("updated");
-  });
-});
-app.post("/update-meds", (req, res) => {
-  Users.findByIdAndUpdate(req.body.id, {
-    purchasedmeds: req.body.purchasedmeds,
-  }).then((data) => {
-    console.log(data);
-    res.send("updated meds");
-  });
 });
 
 // AuthRoutes Section
