@@ -70,7 +70,8 @@ const BedsAvailabilityDetails = ({navigation, route}) => {
                 4.0
               </Text>
             </View>
-            <Text style={{fontSize: 13, color: bedscolor.grey}}>365reviews</Text>
+            {/* <Text style={{fontSize: 13, color: bedscolor.grey}}>365reviews</Text> */}
+            <Text style={{fontSize: 13, color: bedscolor.grey}}>Available Beds: {item.available}</Text>
           </View>
           <View style={{marginTop: 20}}>
             <Text style={{lineHeight: 20, color: bedscolor.grey}}>

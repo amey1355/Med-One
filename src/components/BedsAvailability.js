@@ -115,7 +115,8 @@ const BedsAvailability = ({navigation}) => {
                 <Icon name="star" size={15} color={bedscolor.orange} />
                 <Icon name="star" size={15} color={bedscolor.grey} />
               </View>
-              <Text style={{fontSize: 10, color: bedscolor.grey}}>365reviews</Text>
+              {/* <Text style={{fontSize: 10, color: bedscolor.grey}}>365reviews</Text> */}
+              <Text style={{fontSize: 10, color: bedscolor.grey}}>Available Beds: {hotel.available}</Text>
             </View>
           </View>
         </Animated.View>
@@ -175,8 +176,8 @@ const BedsAvailability = ({navigation}) => {
           />
         </View>
         <CategoryList />
-        <View>
-          <Animated.FlatList
+        <View style={{display: Platform.OS === 'web' ? 'none' : 'flex'}}>
+            <Animated.FlatList
             onMomentumScrollEnd={(e) => {
               setActiveCardIndex(
                 Math.round(e.nativeEvent.contentOffset.x / cardWidth),
