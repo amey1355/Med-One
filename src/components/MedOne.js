@@ -96,7 +96,7 @@ const MedOne = () => {
           ),
         }}
         />
-        <Drawer.Screen name="Camps" component={Camps} 
+        {/* <Drawer.Screen name="Camps" component={Camps} 
         options={{
           drawerIcon: ({color}) => (
             <FontAwesome5 name="clinic-medical" size={22} color={color} />
@@ -110,7 +110,7 @@ const MedOne = () => {
             <AntDesign name="wallet" size={22} color={color} />
           ),
         }}
-        />
+        /> */}
         {/* <Drawer.Screen name="SignIn" component={SignIn} 
         options={{
           drawerIcon: ({color}) => (
