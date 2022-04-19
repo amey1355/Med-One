@@ -35,7 +35,7 @@ const BedsAvailability = ({ navigation }) => {
   const fetchBedsData = () => {
     //For Android
     fetch("http://10.0.2.2:3000/get-beds-data")
-      .then(res => res.json())
+      // .then(res => res.json())
       .then(results => {
 
         // setData(results)
@@ -44,7 +44,7 @@ const BedsAvailability = ({ navigation }) => {
         dispatch({ type: "SET_LOADING", payload: false })
 
       }).catch(err => {
-        // Alert.alert("someting went wrong")
+        Alert.alert("someting went wrong")
         console.log(err);
       })
     //For Web
@@ -108,7 +108,7 @@ const BedsAvailability = ({ navigation }) => {
       </View>
     );
   };
-  const Card = ({ hotel, index }, item) => {
+  const Card = ({ hotel, index }, beditem) => {
     // const {item} = props;
     const inputRange = [
       (index - 1) * cardWidth,
@@ -145,10 +145,10 @@ const BedsAvailability = ({ navigation }) => {
               style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <View>
                 <Text style={{ fontWeight: 'bold', fontSize: 17 }}>
-                  {item.name}
+                  {hotel.name}
                 </Text>
                 <Text style={{ color: bedscolor.grey, fontSize: 12 }}>
-                  {item.location}
+                  {hotel.location}
                 </Text>
               </View>
               <Icon name="bookmark-border" size={26} color={bedscolor.primary} />
@@ -277,15 +277,15 @@ const BedsAvailability = ({ navigation }) => {
         />
 
 
-        {/* Beds Data from db displaying  */}
           </ScrollView>
+        {/* Beds Data from db displaying  */}
         <View>
           <FlatList
             data={data}
-            renderItem={({ item }) => {
-              return Card(item)
+            renderItem={({ beditem }) => {
+              return Card(beditem)
             }}
-            keyExtractor={item => item.name}
+            keyExtractor={beditem => beditem.name}
             onRefresh={() => fetchBedsData()}
             refreshing={loading}
           />

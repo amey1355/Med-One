@@ -101,6 +101,7 @@ const {navigation} = props
                 // Alert.alert(JSON.stringify(`saved successfully`));
                 // Alert.alert("Logout Successfull")
                 navigation.navigate('Home');
+                Alert.alert("Done signout")
                 console.log("Successfully Done sign out");
             })
             .catch(err => {
