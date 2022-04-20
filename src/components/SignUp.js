@@ -26,27 +26,27 @@ const SignUp = ({ navigation }) => {
     }
 
     const signUpData = () => {
-        // fetch("http://10.0.2.2:3000/signup", {
+        fetch("http://10.0.2.2:3000/signup", {
 
-        //     method: "post",
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         email,
-        //         password,
-        //     })
-        // })
-            fetch("http://localhost:3000/signup", {
-                method: "post",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email,
-                    password,
-                })
+            method: "post",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email,
+                password,
             })
+        })
+            // fetch("http://localhost:3000/signup", {
+            //     method: "post",
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify({
+            //         email,
+            //         password,
+            //     })
+            // })
             .then(res => res.json())
             .then(data => {
                 // Alert.alert(`${data.name} is saved successfuly`)

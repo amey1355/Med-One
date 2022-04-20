@@ -29,28 +29,28 @@ const SignIn = ({ navigation, route }) => {
     //Login Functionality:
     const handleLogin = () => {
         //For Android
-        // fetch("http://10.0.2.2:3000/login", {
-        //     method: "post",
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         email,
-        //         password,
+        fetch("http://10.0.2.2:3000/login", {
+            method: "post",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email,
+                password,
 
-        //     })
-        // })
-        //For Windows
-            fetch("http://localhost:3000/login", {
-                method: "post",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email,
-                    password,
-                })
             })
+        })
+        //For Windows
+            // fetch("http://localhost:3000/login", {
+            //     method: "post",
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify({
+            //         email,
+            //         password,
+            //     })
+            // })
             .then(() => {
                 // Alert.alert(`${data.name} is saved successfuly`)
                 // Alert.alert(JSON.stringify(`${data.name} is saved successfully`));

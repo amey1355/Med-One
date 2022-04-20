@@ -23,21 +23,7 @@ const MyProfile = ({ navigation, route, props }) => {
 
   const fetchData = () => {
     //For Android
-    // fetch("http://10.0.2.2:3000/get-data")
-    //   .then(res => res.json())
-    //   .then(results => {
-
-    //     // setData(results)
-    //     // setLoading(false)
-    //     dispatch({ type: "ADD_DATA", payload: results })
-    //     dispatch({ type: "SET_LOADING", payload: false })
-
-    //   }).catch(err => {
-    //     Alert.alert("someting went wrong")
-    //     console.log(err);
-    //   })
-    //For Web
-    fetch("http://localhost:3000/get-data")
+    fetch("http://10.0.2.2:3000/get-data")
       .then(res => res.json())
       .then(results => {
 
@@ -50,6 +36,20 @@ const MyProfile = ({ navigation, route, props }) => {
         Alert.alert("someting went wrong")
         console.log(err);
       })
+    //For Web
+    // fetch("http://localhost:3000/get-data")
+    //   .then(res => res.json())
+    //   .then(results => {
+
+    //     // setData(results)
+    //     // setLoading(false)
+    //     dispatch({ type: "ADD_DATA", payload: results })
+    //     dispatch({ type: "SET_LOADING", payload: false })
+
+    //   }).catch(err => {
+    //     Alert.alert("someting went wrong")
+    //     console.log(err);
+    //   })
   }
   
   useEffect(() => {
@@ -65,8 +65,8 @@ const MyProfile = ({ navigation, route, props }) => {
           />
         <View style={styles.secrootStyle}>
           <Image
-            // source={require('../assets/images/Leo_Bhai.png')}
-            source={{uri: item.picture}}
+            source={require('../assets/images/Leo_Bhai.png')}
+            // source={{uri: item.picture}}
             style={{
               height: 100, width: 100,
               borderRadius: 10,

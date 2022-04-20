@@ -44,38 +44,38 @@ const RegForm = ({ navigation, route }) => {
     const [modal, setModal] = useState(false)
 
     const submitData = () => {
-        // fetch("http://10.0.2.2:3000/send-data", {
-        //     method: "post",
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //      name,
-        //      email,
-        //      phone,
-        //      password,
-        //      picture,
-        //      address,
-        //      gender,
-
-        //     })
-        // })
-        fetch("http://localhost:3000/send-data", {
+        fetch("http://10.0.2.2:3000/send-data", {
             method: "post",
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                name,
-                lname,
-                email,
-                phone,
-                password,
-                picture,
-                address,
-                gender,
+             name,
+             email,
+             phone,
+             password,
+             picture,
+             address,
+             gender,
+
             })
         })
+        // fetch("http://localhost:3000/send-data", {
+        //     method: "post",
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({
+        //         name,
+        //         lname,
+        //         email,
+        //         phone,
+        //         password,
+        //         picture,
+        //         address,
+        //         gender,
+        //     })
+        // })
             // .then(res => res.json())
             .then(() => {
                 // Alert.alert(`${data.name} is saved successfuly`)

@@ -73,28 +73,28 @@ const {navigation} = props
 
     const handleLogout = (email, password) => {
         //For Android
-        // fetch("http://10.0.2.2:3000/logout", {
-        //     method: "post",
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         email,
-        //         password,
-
-        //     })
-        // })
-        //For Windows
-        fetch("http://localhost:3000/logout", {
-            method: "get",
+        fetch("http://10.0.2.2:3000/logout", {
+            method: "post",
             headers: {
                 'Content-Type': 'application/json'
             },
-            // body: JSON.stringify({
-            //     email,
-            //     password,
-            // })
+            body: JSON.stringify({
+                email,
+                password,
+
+            })
         })
+        //For Windows
+        // fetch("http://localhost:3000/logout", {
+        //     method: "get",
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     // body: JSON.stringify({
+        //     //     email,
+        //     //     password,
+        //     // })
+        // })
             .then(() => {
                 // Alert.alert(`${data.name} is saved successfuly`)
                 // Alert.alert(JSON.stringify(`${data.name} is saved successfully`));
@@ -105,7 +105,7 @@ const {navigation} = props
                 console.log("Successfully Done sign out");
             })
             .catch(err => {
-                Alert.alert("someting went wrong")
+                // Alert.alert("someting went wrong")
                 // Alert.alert(JSON.stringify(`Something went wrong while SIGNING IN`, err));
                 console.log(err);
             })
@@ -119,7 +119,8 @@ const {navigation} = props
                     source={require('../assets/menu-bg.png')}
                     style={{ padding: 20 }}>
                     <Image
-                        source={require('../assets/user-profile.jpg')}
+                        // source={require('../assets/user-profile.jpg')}
+                        source={require('../assets/images/Leo_Bhai.png')}
                         // source={item.picture}
                         style={{
                             height: 80, width: 80, borderRadius: 40, marginBottom: 10,
